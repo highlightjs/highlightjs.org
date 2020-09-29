@@ -1,0 +1,16 @@
+.sellingPoints {
+  font-size: 1.4rem;
+  padding-left: 30px;
+}
+
+.trustedBy {
+  padding-left: 0;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    list-style: none;
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+}

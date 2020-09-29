@@ -1,0 +1,16 @@
+.wordMark {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.navigation {
+  padding-left: 0;
+  text-align: right;
+
+  li {
+    display: inline-block;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-left: 15px;
+  }
+}
