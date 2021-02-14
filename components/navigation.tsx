@@ -5,11 +5,11 @@ import React from 'react';
 import styles from './navigation.module.scss';
 
 const links = [
-  <Link href="#">Usage</Link>,
+  <Link href="/#usage">Usage</Link>,
   <Link href="#">News</Link>,
-  <Link href="#">Docs</Link>,
+  <Link href="https://highlightjs.readthedocs.io/">Docs</Link>,
   <Link href="#">Demo</Link>,
-  <Link href="#">GitHub</Link>,
+  <Link href="https://github.com/highlightjs/highlight.js">GitHub</Link>,
 ];
 
 export const Navigation = () => (
