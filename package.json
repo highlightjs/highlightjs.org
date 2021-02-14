@@ -8,10 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
-    "@types/markdown-it": "^12.0.1",
     "bootstrap": "^4.5.2",
     "dedent": "^0.7.0",
     "highlight.js": "^10.2.0",
+    "indent-textarea": "^2.0.3",
     "markdown-it": "^12.0.4",
     "markdown-it-attrs": "^4.0.0",
     "next": "9.5.3",
@@ -20,8 +20,10 @@
     "sass": "^1.26.11"
   },
   "devDependencies": {
+    "@types/markdown-it": "^12.0.1",
     "@types/node": "^14.11.2",
     "@types/react": "^16.9.49",
+    "next-transpile-modules": "^6.3.0",
     "typescript": "^4.0.3"
   },
   "prettier": {
