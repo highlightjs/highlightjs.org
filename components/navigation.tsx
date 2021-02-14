@@ -8,7 +8,7 @@ const links = [
   <Link href="/#usage">Usage</Link>,
   <Link href="#">News</Link>,
   <Link href="https://highlightjs.readthedocs.io/">Docs</Link>,
-  <Link href="#">Demo</Link>,
+  <Link href="/demo/">Demo</Link>,
   <Link href="https://github.com/highlightjs/highlight.js">GitHub</Link>,
 ];
 
