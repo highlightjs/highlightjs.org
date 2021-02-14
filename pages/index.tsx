@@ -1,6 +1,7 @@
 import { CodeBlock } from '../components/codeblock';
 import { HTMLTagsExample } from '../components/home/cdn-block';
 import { LightBackground } from '../components/lightbackground';
+import { Markdown } from '../components/markdown';
 import { MainLayout } from '../layouts/main';
 
 import styles from '../styles/Home.module.scss'
@@ -66,26 +67,24 @@ const Home = () => (
     <div className="container">
       <div className="row">
         <div className="col-lg-8 offset-lg-2">
-          <h2 className="text-center" id="usage">
-            Usage
-          </h2>
-
-          <p>
+          <Markdown body={`
+            ## Usage {.text-center #usage}
+            
             highlight.js can be used in different ways such using CDNs, hosting the bundle yourself, as a Vue plug-in,
             as ES6 modules, with Node.js, and web workers.
-          </p>
 
-          <p>See <a href="https://github.com/highlightjs/highlight.js#getting-started">our README on GitHub</a> for more details.</p>
-
-          <h3 id="usage-as-html-tags">
-            As HTML Tags
-          </h3>
+            See [our README on GitHub](https://github.com/highlightjs/highlight.js#getting-started) for more details.
+            
+            ### As HTML Tags {#as-html-tags}
+          `} />
 
           <HTMLTagsExample className="my-4" version="10.6.0" />
 
-          <p>
-            This will find and highlight code inside of <code>&lt;pre&gt;&lt;code&gt;</code> tags; it tries to detect the language automatically. If automatic detection doesn’t work for you, you can specify the language in the class attribute:
-          </p>
+          <Markdown body={`
+            This will find and highlight code inside of \`<pre><code>\` tags; it tries to detect the language
+            automatically. If automatic detection doesn’t work for you, you can specify the language in the class
+            attribute:            
+          `}/>
 
           <CodeBlock
             code={`<pre><code class="html">...</code></pre>`}
