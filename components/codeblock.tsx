@@ -1,5 +1,5 @@
-import React from 'react';
 import hljs from 'highlight.js';
+import React from 'react';
 
 import styles from './codeblock.module.scss';
 
@@ -9,8 +9,16 @@ interface Props {
   language: string;
 }
 
-function createMarkup(code: string, language: string) {
-  return { __html: hljs.highlight(language, code).value.trim() };
+function createMarkup(code: string, language: string | null) {
+  let result: HighlightResult;
+
+  if (language === null) {
+    result = hljs.highlightAuto(code);
+  } else {
+    result = hljs.highlight(language, code);
+  }
+
+  return { __html: result.value.trim() };
 }
 
 export const CodeBlock = ({ code, language, className }: Props) => (
