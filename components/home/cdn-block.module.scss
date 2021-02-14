@@ -1,0 +1,24 @@
+$background-color: #282C34;
+
+.wrapper {
+  position: relative;
+}
+
+.tabs {
+  position: relative;
+  z-index: 100;
+}
+
+.tab {
+  background-color: $background-color;
+  border: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: white;
+  margin-right: 1px;
+  padding: 0.5rem 1rem;
+}
+
+.active {
+  background-color: lighten($background-color, 10%);
+}

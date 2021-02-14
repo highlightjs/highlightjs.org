@@ -1,12 +1,15 @@
 import dedent from 'dedent';
 import {HTMLAttributes, useState} from "react";
+
 import { CodeBlock } from "../codeblock";
+
+import styles from './cdn-block.module.scss';
 
 interface Props extends HTMLAttributes<HTMLDivElement>{
   version: string;
 }
 
-export const HTMLTagsExample = ({ version, ...props }: Props) => {
+export const HTMLTagsExample = ({ className, version, ...props }: Props) => {
   const [cdn, setCDN] = useState('cdnjs');
   const links = {
     cdnjs: {
@@ -48,15 +51,22 @@ export const HTMLTagsExample = ({ version, ...props }: Props) => {
 
   const codeBlock = codeBlockSource
     .join('\n\n')
-    .replaceAll('{version}', version)
+    .replace(/{version}/g, version)
     .trim()
   ;
 
   return (
-    <div {...props}>
-      <div>
+    <div className={[styles.wrapper, className].join(' ')} {...props}>
+      <div className={styles.tabs}>
         {Object.keys(links).map((name, index) => (
-          <button key={index} onClick={() => setCDN(name)}>
+          <button
+            key={index}
+            className={[
+              styles.tab,
+              cdn !== name ? styles.active : '',
+            ].join(' ')}
+            onClick={() => setCDN(name)}
+          >
             {name}
           </button>
         ))}
