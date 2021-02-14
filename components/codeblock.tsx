@@ -14,7 +14,7 @@ function createMarkup(code: string, language: string) {
 }
 
 export const CodeBlock = ({ code, language, className }: Props) => (
-  <pre className={`hljs p-4 ${className} ${styles.codeBlock}`}>
+  <pre className={`hljs p-4 ${className ?? ''} ${styles.codeBlock}`}>
     <code
       dangerouslySetInnerHTML={createMarkup(code, language)}
     />

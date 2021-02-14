@@ -75,6 +75,17 @@ const Home = () => (
 
             See [our README on GitHub](https://github.com/highlightjs/highlight.js#getting-started) for more details.
             
+            ### As a Module {#as-a-module}
+            
+            Highlight.js can be used on the server. The package with all supported languages can be installed from
+            NPM or Yarn:
+            
+            ~~~bash
+            npm install highlight.js
+            # or
+            yarn add highlight.js
+            ~~~
+            
             ### As HTML Tags {#as-html-tags}
           `} />
 

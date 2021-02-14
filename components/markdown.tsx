@@ -2,6 +2,8 @@ import dedent from 'dedent';
 import MarkdownIt from "markdown-it";
 import * as MarkdownItAttrs from 'markdown-it-attrs';
 
+import styles from './markdown.module.scss';
+
 interface Props {
   body: string;
 }
@@ -18,7 +20,7 @@ export const Markdown = ({ body }: Props) => {
 
   return (
     <div
-      className="markdown-body"
+      className={styles.markdown}
       dangerouslySetInnerHTML={{ __html: output }}
     />
   );
