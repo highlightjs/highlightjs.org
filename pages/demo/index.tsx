@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { CodeBlock } from "../../components/codeblock";
-import { DumbEditor } from "../../components/dumb-editor";
-import { LanguageSelector } from "../../components/language-selector";
-import { MainLayout } from "../../layouts/main";
-
+import { CodeBlock } from '../../components/codeblock';
+import { DumbEditor } from '../../components/dumb-editor';
+import { LanguageSelector } from '../../components/language-selector';
+import { MainLayout } from '../../layouts/main';
 import styles from '../../styles/Demo.module.scss';
 
 interface Data {
@@ -30,7 +29,7 @@ function parseURL(): Data {
   return {
     lang: params.get('lang'),
     code: atob(params.get('code') ?? ''),
-  }
+  };
 }
 
 const Demo = () => {
@@ -57,10 +56,7 @@ const Demo = () => {
               <LanguageSelector onChange={setLang} />
 
               <div className="ml-auto mt-auto">
-                <button
-                  className={styles.shareButton}
-                  onClick={handleShare}
-                >
+                <button className={styles.shareButton} onClick={handleShare}>
                   Share
                 </button>
               </div>

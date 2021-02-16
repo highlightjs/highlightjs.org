@@ -1,5 +1,5 @@
 import hljs from 'highlight.js';
-import { SyntheticEvent } from "react";
+import { SyntheticEvent } from 'react';
 
 interface Props {
   className?: string;
@@ -14,16 +14,9 @@ export const LanguageSelector = ({ className, onChange }: Props) => {
 
   return (
     <div className={className}>
-      <label
-        htmlFor="language-selector"
-      >
-        Language
-      </label>
-      <select
-        name="language-selector"
-        onChangeCapture={handleOnChange}
-      >
-        {['(auto)', ...hljs.listLanguages()].map(language => (
+      <label htmlFor="language-selector">Language</label>
+      <select name="language-selector" onChangeCapture={handleOnChange}>
+        {['(auto)', ...hljs.listLanguages()].map((language) => (
           <option key={language} value={language}>
             {language}
           </option>

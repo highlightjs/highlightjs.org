@@ -1,5 +1,5 @@
 import dedent from 'dedent';
-import MarkdownIt from "markdown-it";
+import MarkdownIt from 'markdown-it';
 import * as MarkdownItAttrs from 'markdown-it-attrs';
 
 import styles from './markdown.module.scss';

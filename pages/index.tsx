@@ -1,17 +1,16 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
-import { CodeBlock } from '../components/codeblock';
 import { HTMLTagsExample } from '../components/cdn-block';
+import { CodeBlock } from '../components/codeblock';
 import { LightBackground } from '../components/lightbackground';
 import { Markdown } from '../components/markdown';
-import { MainLayout } from '../layouts/main';
-
 import snippets from '../data/snippets.json';
-import styles from '../styles/Home.module.scss'
+import { MainLayout } from '../layouts/main';
+import styles from '../styles/Home.module.scss';
 
 const snippetLanguages = Object.keys(snippets);
 
-function getRandomInt(max) {
+function randInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
@@ -20,7 +19,7 @@ const Home = () => {
   const [lang, setLang] = useState(snippetLanguages[snipIndex]);
   const [snippet, setSnippet] = useState(snippets[lang]);
 
-  const randomizeSnippet = () => setSnipIndex(getRandomInt(snippetLanguages.length));
+  const randomizeSnippet = () => setSnipIndex(randInt(snippetLanguages.length));
 
   useEffect(randomizeSnippet, []);
   useEffect(() => {
@@ -54,19 +53,17 @@ const Home = () => {
       </div>
 
       <LightBackground>
-        <h2 className="mb-4 text-center">
-          Trusted by
-        </h2>
+        <h2 className="mb-4 text-center">Trusted by</h2>
 
         <ul className={`mb-3 ${styles.trustedBy}`}>
           <li>
-            <img src="./stackoverflow.png" alt="Stackoverflow"/>
+            <img src="./stackoverflow.png" alt="Stackoverflow" />
           </li>
           <li>
-            <img src="./discord.png" alt="Discord"/>
+            <img src="./discord.png" alt="Discord" />
           </li>
           <li>
-            <img src="./vscode.png" alt="Visual Studio Code"/>
+            <img src="./vscode.png" alt="Visual Studio Code" />
           </li>
         </ul>
       </LightBackground>
@@ -74,7 +71,8 @@ const Home = () => {
       <div className="container">
         <div className="row">
           <div className="col-lg-8 offset-lg-2">
-            <Markdown body={`
+            <Markdown
+              body={`
               ## Usage {.text-center #usage}
               
               highlight.js can be used in different ways such using CDNs, hosting the bundle yourself, as a Vue plug-in,
@@ -94,15 +92,18 @@ const Home = () => {
               ~~~
               
               ### As HTML Tags {#as-html-tags}
-            `}/>
+            `}
+            />
 
-            <HTMLTagsExample className="my-4" version="10.6.0"/>
+            <HTMLTagsExample className="my-4" version="10.6.0" />
 
-            <Markdown body={`
+            <Markdown
+              body={`
               This will find and highlight code inside of \`<pre><code>\` tags; it tries to detect the language
               automatically. If automatic detection doesn’t work for you, you can specify the language in the class
               attribute:            
-            `}/>
+            `}
+            />
 
             <CodeBlock
               code={`<pre><code class="html">...</code></pre>`}

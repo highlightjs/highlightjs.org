@@ -27,7 +27,9 @@ export const Navigation = () => (
       </div>
       <div className="col-md-6">
         <ul className={`mb-0 ${styles.navigation}`}>
-          {links.map((link, i) => <li key={i}>{link}</li>)}
+          {links.map((link, i) => (
+            <li key={i}>{link}</li>
+          ))}
         </ul>
       </div>
     </nav>

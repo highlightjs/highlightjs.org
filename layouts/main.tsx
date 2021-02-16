@@ -2,7 +2,6 @@ import React, { ReactNode } from 'react';
 
 import { Footer } from '../components/footer';
 import { Navigation } from '../components/navigation';
-
 import styles from './main.module.scss';
 
 interface Props {
@@ -14,9 +13,7 @@ export const MainLayout = (props: Props) => {
     <div>
       <Navigation />
 
-      <main>
-        {props.children}
-      </main>
+      <main>{props.children}</main>
 
       <Footer />
     </div>

@@ -28,13 +28,9 @@ export const CodeBlock = ({ code, language = null, className }: Props) => {
   return (
     <div>
       <pre className={`hljs p-4 ${className ?? ''} ${styles.codeBlock}`}>
-        <code
-          dangerouslySetInnerHTML={markup}
-        />
+        <code dangerouslySetInnerHTML={markup} />
       </pre>
-      <div>
-        Language: {result.language ?? language}
-      </div>
+      <div>Language: {result.language ?? language}</div>
     </div>
   );
 };

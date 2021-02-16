@@ -17,7 +17,7 @@ body {
     border-color: $palette-grey transparent transparent transparent;
     border-style: solid;
     border-width: 1200px 85vw 0 0;
-    content: "";
+    content: '';
     display: block;
     height: 0;
     left: 0;
@@ -47,18 +47,12 @@ select {
   color: white;
   padding: 0.5rem;
 
-  background-image:
-    linear-gradient(45deg, transparent 50%, $arrow-color 50%),
+  background-image: linear-gradient(45deg, transparent 50%, $arrow-color 50%),
     linear-gradient(135deg, $arrow-color 50%, transparent 50%),
     linear-gradient(to right, $arrow-color, $arrow-color);
-  background-position:
-    calc(100% - 20px) calc(1em + 2px),
-    calc(100% - 15px) calc(1em + 2px),
-    calc(100% - 2.5em) 0.5em;
-  background-size:
-    5px 5px,
-    5px 5px,
-    1px 1.5em;
+  background-position: calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
   background-repeat: no-repeat;
 }
 

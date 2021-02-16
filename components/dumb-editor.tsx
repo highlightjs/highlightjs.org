@@ -1,5 +1,5 @@
 import { watch } from 'indent-textarea';
-import { SyntheticEvent, useEffect, useRef } from "react";
+import { SyntheticEvent, useEffect, useRef } from 'react';
 
 import styles from './dumb-editor.module.scss';
 
@@ -19,7 +19,9 @@ export const DumbEditor = ({ className, onChange, value }: Props) => {
 
   return (
     <div>
-      <label className={styles.label} htmlFor="code-editor">Code</label>
+      <label className={styles.label} htmlFor="code-editor">
+        Code
+      </label>
       <textarea
         ref={ref}
         id="code-editor"

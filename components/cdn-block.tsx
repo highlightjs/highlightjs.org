@@ -1,11 +1,10 @@
 import dedent from 'dedent';
-import {HTMLAttributes, useState} from "react";
-
-import { CodeBlock } from "./codeblock";
+import { HTMLAttributes, useState } from 'react';
 
 import styles from './cdn-block.module.scss';
+import { CodeBlock } from './codeblock';
 
-interface Props extends HTMLAttributes<HTMLDivElement>{
+interface Props extends HTMLAttributes<HTMLDivElement> {
   version: string;
 }
 
@@ -13,19 +12,28 @@ export const HTMLTagsExample = ({ className, version, ...props }: Props) => {
   const [cdn, setCDN] = useState('cdnjs');
   const links = {
     cdnjs: {
-      link: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/styles/default.min.css',
-      script: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/highlight.min.js',
-      lang: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/languages/go.min.js',
+      link:
+        'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/styles/default.min.css',
+      script:
+        'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/highlight.min.js',
+      lang:
+        'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/languages/go.min.js',
     },
     jsDeliver: {
-      link: 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/styles/default.min.css',
-      script: 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/highlight.min.js',
-      lang: 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/languages/go.min.js',
+      link:
+        'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/styles/default.min.css',
+      script:
+        'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/highlight.min.js',
+      lang:
+        'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/languages/go.min.js',
     },
     unpkg: {
-      link: 'https://unpkg.com/@highlightjs/cdn-assets@{version}/styles/default.min.css',
-      script: 'https://unpkg.com/@highlightjs/cdn-assets@{version}/highlight.min.js',
-      lang: 'https://unpkg.com/@highlightjs/cdn-assets@{version}/languages/go.min.js',
+      link:
+        'https://unpkg.com/@highlightjs/cdn-assets@{version}/styles/default.min.css',
+      script:
+        'https://unpkg.com/@highlightjs/cdn-assets@{version}/highlight.min.js',
+      lang:
+        'https://unpkg.com/@highlightjs/cdn-assets@{version}/languages/go.min.js',
     },
     'Self hosted': {
       link: '/path/to/styles/default.css',
@@ -37,7 +45,7 @@ export const HTMLTagsExample = ({ className, version, ...props }: Props) => {
     dedent`
       <link rel="stylesheet" href="${links[cdn].link}">
       <script src="${links[cdn].script}"></script>
-    `
+    `,
   ];
 
   if (links[cdn].lang) {
@@ -52,19 +60,16 @@ export const HTMLTagsExample = ({ className, version, ...props }: Props) => {
   const codeBlock = codeBlockSource
     .join('\n\n')
     .replace(/{version}/g, version)
-    .trim()
-  ;
-
+    .trim();
   return (
     <div className={[styles.wrapper, className].join(' ')} {...props}>
       <div className={styles.tabs}>
         {Object.keys(links).map((name, index) => (
           <button
             key={index}
-            className={[
-              styles.tab,
-              cdn !== name ? styles.active : '',
-            ].join(' ')}
+            className={[styles.tab, cdn !== name ? styles.active : ''].join(
+              ' ',
+            )}
             onClick={() => setCDN(name)}
           >
             {name}
@@ -75,4 +80,4 @@ export const HTMLTagsExample = ({ className, version, ...props }: Props) => {
       <CodeBlock code={codeBlock} language="html" />
     </div>
   );
-}
+};
