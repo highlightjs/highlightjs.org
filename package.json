@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "snippets": "node scripts/build-snippets.js",
     "format": "prettier --list-different --write \"{.github,components,layouts,pages,scripts,styles}/**/*.{css,js,jsx,mdx,ts,tsx,scss,yaml,yml}\""
