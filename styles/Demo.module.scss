@@ -1,3 +1,19 @@
+@import '../styles/variables';
+
+.shareButton {
+  background-color: $palette-green;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+
+  &:focus,
+  &:hover {
+    background-color: $palette-dark-green;
+  }
+}
+
 .tabStyle {
   tab-size: 2rem;
 }
