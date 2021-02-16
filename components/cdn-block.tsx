@@ -1,7 +1,7 @@
 import dedent from 'dedent';
 import {HTMLAttributes, useState} from "react";
 
-import { CodeBlock } from "../codeblock";
+import { CodeBlock } from "./codeblock";
 
 import styles from './cdn-block.module.scss';
 

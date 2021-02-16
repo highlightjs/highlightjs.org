@@ -1,5 +1,5 @@
 import { CodeBlock } from '../components/codeblock';
-import { HTMLTagsExample } from '../components/home/cdn-block';
+import { HTMLTagsExample } from '../components/cdn-block';
 import { LightBackground } from '../components/lightbackground';
 import { Markdown } from '../components/markdown';
 import { MainLayout } from '../layouts/main';
