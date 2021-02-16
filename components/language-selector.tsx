@@ -24,7 +24,7 @@ export const LanguageSelector = ({ className, onChange }: Props) => {
         onChangeCapture={handleOnChange}
       >
         {['(auto)', ...hljs.listLanguages()].map(language => (
-          <option value={language}>
+          <option key={language} value={language}>
             {language}
           </option>
         ))}
