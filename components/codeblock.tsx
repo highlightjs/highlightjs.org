@@ -6,25 +6,35 @@ import styles from './codeblock.module.scss';
 interface Props {
   className?: string;
   code: string;
-  language: string;
+  language: string | null;
 }
 
-function createMarkup(code: string, language: string | null) {
-  let result: HighlightResult;
-
-  if (language === null) {
-    result = hljs.highlightAuto(code);
-  } else {
-    result = hljs.highlight(language, code);
-  }
-
+function createMarkup(result: HighlightResult): { __html: string } {
   return { __html: result.value.trim() };
 }
 
-export const CodeBlock = ({ code, language, className }: Props) => (
-  <pre className={`hljs p-4 ${className ?? ''} ${styles.codeBlock}`}>
-    <code
-      dangerouslySetInnerHTML={createMarkup(code, language)}
-    />
-  </pre>
-);
+function highlight(code: string, language: string | null): HighlightResult {
+  if (language === null) {
+    return hljs.highlightAuto(code);
+  }
+
+  return hljs.highlight(language, code);
+}
+
+export const CodeBlock = ({ code, language = null, className }: Props) => {
+  const result = highlight(code, language);
+  const markup = createMarkup(result);
+
+  return (
+    <div>
+      <pre className={`hljs p-4 ${className ?? ''} ${styles.codeBlock}`}>
+        <code
+          dangerouslySetInnerHTML={markup}
+        />
+      </pre>
+      <div>
+        Language: {result.language ?? language}
+      </div>
+    </div>
+  );
+};
