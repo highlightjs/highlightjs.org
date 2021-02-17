@@ -12,7 +12,7 @@ interface Data {
 }
 
 function persistToURL({ code, lang }: Data): void {
-  const params = new URLSearchParams(window.location.hash);
+  const params = new URLSearchParams();
 
   if (lang !== null) {
     params.set('lang', lang);
