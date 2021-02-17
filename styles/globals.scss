@@ -46,6 +46,7 @@ select {
   border-radius: 5px;
   color: white;
   padding: 0.5rem;
+  width: 100%;
 
   background-image: linear-gradient(45deg, transparent 50%, $arrow-color 50%),
     linear-gradient(135deg, $arrow-color 50%, transparent 50%),
@@ -68,7 +69,8 @@ select {
   border: 0;
 }
 
-.sr-only-focusable:active, .sr-only-focusable:focus {
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
   position: static;
   width: auto;
   height: auto;
@@ -79,4 +81,8 @@ select {
 
 .text-center {
   text-align: center;
+}
+
+.w-100 {
+  width: 100%;
 }

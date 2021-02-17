@@ -54,7 +54,11 @@ const Demo = () => {
           <div className={`col-md-6 ${styles.editorSection}`}>
             <div className={styles.stickyWrapper}>
               <div className="d-flex mb-3">
-                <LanguageSelector onChange={setLang} />
+                <div className="row w-100">
+                  <div className="col-md-6">
+                    <LanguageSelector className="w-100" onChange={setLang} />
+                  </div>
+                </div>
 
                 <div className="ml-auto mt-auto">
                   <button className={styles.shareButton} onClick={handleShare}>
