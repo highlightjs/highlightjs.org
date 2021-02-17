@@ -51,26 +51,28 @@ const Demo = () => {
     <MainLayout>
       <div className="container">
         <div className="row">
-          <div className="col-md-6">
-            <div className="d-flex mb-3">
-              <LanguageSelector onChange={setLang} />
+          <div className={`col-md-6 ${styles.editorSection}`}>
+            <div className={styles.stickyWrapper}>
+              <div className="d-flex mb-3">
+                <LanguageSelector onChange={setLang} />
 
-              <div className="ml-auto mt-auto">
-                <button className={styles.shareButton} onClick={handleShare}>
-                  Share
-                </button>
+                <div className="ml-auto mt-auto">
+                  <button className={styles.shareButton} onClick={handleShare}>
+                    Share
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <DumbEditor
-              className={styles.tabStyle}
-              onChange={setCode}
-              value={code}
-            />
+              <DumbEditor
+                className={styles.tabStyle}
+                onChange={setCode}
+                value={code}
+              />
+            </div>
           </div>
           <div className="col-md-6">
             <CodeBlock
-              className={styles.tabStyle}
+              className={[styles.codeEditor, styles.tabStyle].join(' ')}
               code={code}
               language={lang}
             />

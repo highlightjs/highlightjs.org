@@ -26,11 +26,14 @@ export const CodeBlock = ({ code, language = null, className }: Props) => {
   const markup = createMarkup(result);
 
   return (
-    <div>
-      <pre className={`hljs p-4 ${className ?? ''} ${styles.codeBlock}`}>
+    <div className={[styles.codeBlock, className].join(' ')}>
+      <pre className={`hljs mb-0 ${styles.hljsBlock}`}>
         <code dangerouslySetInnerHTML={markup} />
       </pre>
-      <div>Language: {result.language ?? language}</div>
+      <p className={styles.tagLang}>
+        <span className="sr-only">Language:</span>
+        {result.language ?? language ?? 'text'}
+      </p>
     </div>
   );
 };

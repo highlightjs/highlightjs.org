@@ -1,5 +1,14 @@
 @import '../styles/variables';
 
+.editorSection {
+  position: relative;
+}
+
+.stickyWrapper {
+  position: sticky;
+  top: 15px;
+}
+
 .shareButton {
   background-color: $palette-green;
   border: 1px solid transparent;
@@ -12,6 +21,10 @@
   &:hover {
     background-color: $palette-dark-green;
   }
+}
+
+.codeEditor {
+  height: 100%;
 }
 
 .tabStyle {
