@@ -8,7 +8,7 @@ interface Props {
   className?: string;
   code: string;
   language: string | null;
-  theme: string | null;
+  theme?: string;
 }
 
 function createMarkup(result: HighlightResult): { __html: string } {
@@ -26,7 +26,7 @@ function highlight(code: string, language: string | null): HighlightResult {
 export const CodeBlock = ({
   code,
   language = null,
-  theme = null,
+  theme,
   className,
 }: Props) => {
   const result = highlight(code, language);
