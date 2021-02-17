@@ -1,12 +1,14 @@
 import hljs from 'highlight.js';
 import React from 'react';
 
+import themes from '../data/themes.json';
 import styles from './codeblock.module.scss';
 
 interface Props {
   className?: string;
   code: string;
   language: string | null;
+  theme: string | null;
 }
 
 function createMarkup(result: HighlightResult): { __html: string } {
@@ -21,12 +23,18 @@ function highlight(code: string, language: string | null): HighlightResult {
   return hljs.highlight(language, code);
 }
 
-export const CodeBlock = ({ code, language = null, className }: Props) => {
+export const CodeBlock = ({
+  code,
+  language = null,
+  theme = null,
+  className,
+}: Props) => {
   const result = highlight(code, language);
   const markup = createMarkup(result);
+  const hljsTheme = themes.indexOf(theme) >= 0 ? theme : 'atom-one-dark';
 
   return (
-    <div className={[styles.codeBlock, className].join(' ')}>
+    <div className={[hljsTheme, styles.codeBlock, className].join(' ')}>
       <pre className={`hljs mb-0 ${styles.hljsBlock}`}>
         <code dangerouslySetInnerHTML={markup} />
       </pre>

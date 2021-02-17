@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { CodeBlock } from '../../components/codeblock';
 import { DumbEditor } from '../../components/dumb-editor';
 import { LanguageSelector } from '../../components/language-selector';
+import { ThemeSelector } from '../../components/theme-selector';
 import { MainLayout } from '../../layouts/main';
 import styles from '../../styles/Demo.module.scss';
 
@@ -35,6 +36,7 @@ function parseURL(): Data {
 const Demo = () => {
   const [code, setCode] = useState('');
   const [lang, setLang] = useState<string | null>(null);
+  const [theme, setTheme] = useState<string | null>(null);
 
   const handleShare = () => {
     persistToURL({ code, lang });
@@ -58,6 +60,9 @@ const Demo = () => {
                   <div className="col-md-6">
                     <LanguageSelector className="w-100" onChange={setLang} />
                   </div>
+                  <div className="col-md-6">
+                    <ThemeSelector className="w-100" onChange={setTheme} />
+                  </div>
                 </div>
 
                 <div className="ml-auto mt-auto">
@@ -79,6 +84,7 @@ const Demo = () => {
               className={[styles.codeEditor, styles.tabStyle].join(' ')}
               code={code}
               language={lang}
+              theme={theme}
             />
           </div>
         </div>

@@ -34,4 +34,5 @@ yarn-error.log*
 .vercel
 
 # generated data files
-data/*.json
+data/
+highlight.js/
