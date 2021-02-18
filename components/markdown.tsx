@@ -1,14 +1,23 @@
 import dedent from 'dedent';
 import MarkdownIt from 'markdown-it';
 import * as MarkdownItAttrs from 'markdown-it-attrs';
+import ReactDOMServer from 'react-dom/server';
 
 import styles from './markdown.module.scss';
+import { CodeBlock } from './codeblock';
 
 interface Props {
   body: string;
 }
 
-const md = MarkdownIt();
+const md = MarkdownIt({
+  highlight: (str, lang): string => {
+    return ReactDOMServer.renderToStaticMarkup(
+      <CodeBlock code={str} language={lang} />
+    );
+  },
+});
+
 md.use(MarkdownItAttrs, {
   leftDelimiter: '{',
   rightDelimiter: '}',
