@@ -62,24 +62,22 @@ const Demo = () => {
     <MainLayout>
       <div className="container">
         <div className="row">
-          <div className={`col-md-6 ${styles.editorSection}`}>
+          <div className={`col-lg-6 mb-3 mb-lg-0 ${styles.editorSection}`}>
             <div className={styles.stickyWrapper}>
-              <div className="d-flex mb-3">
-                <div className="row w-100">
-                  <div className="col-md-6">
-                    <LanguageSelector
-                      className="w-100"
-                      onChange={setLang}
-                      value={lang}
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <ThemeSelector
-                      className="w-100"
-                      onChange={setTheme}
-                      value={theme}
-                    />
-                  </div>
+              <div className="d-md-flex mb-3">
+                <div className="flex-md-grow-1 mb-3 mb-md-0 pr-3">
+                  <LanguageSelector
+                    className="w-100"
+                    onChange={setLang}
+                    value={lang}
+                  />
+                </div>
+                <div className="flex-md-grow-1 mb-3 mb-md-0 pr-3">
+                  <ThemeSelector
+                    className="w-100"
+                    onChange={setTheme}
+                    value={theme}
+                  />
                 </div>
 
                 <div className="ml-auto mt-auto">
@@ -96,7 +94,7 @@ const Demo = () => {
               />
             </div>
           </div>
-          <div className="col-md-6">
+          <div className="col-lg-6">
             <CodeBlock
               className={[styles.codeEditor, styles.tabStyle].join(' ')}
               code={code}

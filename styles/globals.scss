@@ -43,18 +43,15 @@ select {
 
   appearance: none;
   background-color: $palette-light-grey;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
   border-radius: 5px;
   color: white;
-  padding: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem 2.25rem 0.5rem 0.75rem;
   width: 100%;
-
-  background-image: linear-gradient(45deg, transparent 50%, $arrow-color 50%),
-    linear-gradient(135deg, $arrow-color 50%, transparent 50%),
-    linear-gradient(to right, $arrow-color, $arrow-color);
-  background-position: calc(100% - 20px) calc(1em + 2px),
-    calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
-  background-size: 5px 5px, 5px 5px, 1px 1.5em;
-  background-repeat: no-repeat;
 }
 
 .sr-only {
