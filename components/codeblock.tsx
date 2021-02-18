@@ -35,7 +35,7 @@ export const CodeBlock = ({
 
   return (
     <div className={[hljsTheme, styles.codeBlock, className].join(' ')}>
-      <pre className={`hljs mb-0 ${styles.hljsBlock}`}>
+      <pre className={`hljs mb-0 p-4 ${styles.hljsBlock}`}>
         <code dangerouslySetInnerHTML={markup} />
       </pre>
       <p className={styles.tagLang}>

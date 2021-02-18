@@ -6,8 +6,8 @@ interface Props {
   children: ReactNode | ReactNode[];
 }
 
-export const LightBackground = (props: Props) => (
+export const LightBackground = ({ children }: Props) => (
   <div className={`my-4 ${styles.lightBackground}`}>
-    <div className="container py-4">{props.children}</div>
+    <div className="container py-4">{children}</div>
   </div>
 );

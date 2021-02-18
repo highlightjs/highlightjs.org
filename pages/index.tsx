@@ -73,41 +73,40 @@ const Home = () => {
           <div className="col-lg-8 offset-lg-2">
             <Markdown
               body={`
-              ## Usage {.text-center #usage}
-              
-              highlight.js can be used in different ways such using CDNs, hosting the bundle yourself, as a Vue plug-in,
-              as ES6 modules, with Node.js, and web workers.
-  
-              See [our README on GitHub](https://github.com/highlightjs/highlight.js#getting-started) for more details.
-              
-              ### As a Module {#as-a-module}
-              
-              Highlight.js can be used on the server. The package with all supported languages can be installed from
-              NPM or Yarn:
-              
-              ~~~bash
-              npm install highlight.js
-              # or
-              yarn add highlight.js
-              ~~~
-              
-              ### As HTML Tags {#as-html-tags}
-            `}
+                ## Usage {.text-center #usage}
+
+                highlight.js can be used in different ways such using CDNs, hosting the bundle yourself, as a Vue
+                plug-in, as ES6 modules, with Node.js, and web workers.
+
+                See [our README on GitHub](https://github.com/highlightjs/highlight.js#getting-started) for more details.
+
+                ### As a Module {#as-a-module}
+
+                Highlight.js can be used on the server. The package with all supported languages can be installed from
+                NPM or Yarn:
+
+                ~~~bash
+                npm install highlight.js
+                # or
+                yarn add highlight.js
+                ~~~
+
+                ### As HTML Tags {#as-html-tags}
+              `}
             />
 
             <HTMLTagsExample className="my-4" version="10.6.0" />
 
             <Markdown
               body={`
-              This will find and highlight code inside of \`<pre><code>\` tags; it tries to detect the language
-              automatically. If automatic detection doesn’t work for you, you can specify the language in the class
-              attribute:            
-            `}
-            />
+                This will find and highlight code inside of \`<pre><code>\` tags; it tries to detect the language
+                automatically. If automatic detection doesn’t work for you, you can specify the language in the class
+                attribute:
 
-            <CodeBlock
-              code={`<pre><code class="html">...</code></pre>`}
-              language="html"
+                ~~~html
+                <pre><code class="html">...</code></pre>
+                ~~~
+              `}
             />
           </div>
         </div>
