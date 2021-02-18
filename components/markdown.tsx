@@ -3,8 +3,8 @@ import MarkdownIt from 'markdown-it';
 import * as MarkdownItAttrs from 'markdown-it-attrs';
 import ReactDOMServer from 'react-dom/server';
 
-import styles from './markdown.module.scss';
 import { CodeBlock } from './codeblock';
+import styles from './markdown.module.scss';
 
 interface Props {
   body: string;
@@ -13,7 +13,7 @@ interface Props {
 const md = MarkdownIt({
   highlight: (str, lang): string => {
     return ReactDOMServer.renderToStaticMarkup(
-      <CodeBlock code={str} language={lang} />
+      <CodeBlock code={str} language={lang} />,
     );
   },
 });
