@@ -4,9 +4,10 @@ import { SyntheticEvent } from 'react';
 interface Props {
   className?: string;
   onChange: (lang: string) => void;
+  value: string | null;
 }
 
-export const LanguageSelector = ({ className, onChange }: Props) => {
+export const LanguageSelector = ({ className, onChange, value }: Props) => {
   const handleOnChange = (event: SyntheticEvent<HTMLSelectElement>) => {
     const language = event.currentTarget.value;
     onChange(language === '(auto)' ? null : language);
@@ -14,12 +15,10 @@ export const LanguageSelector = ({ className, onChange }: Props) => {
 
   return (
     <div className={className}>
-      <label htmlFor="language-selector">Language</label>
-      <select name="language-selector" onChangeCapture={handleOnChange}>
+      <label htmlFor="lang-selector">Language</label>
+      <select id="lang-selector" onChangeCapture={handleOnChange} value={value}>
         {['(auto)', ...hljs.listLanguages()].map((language) => (
-          <option key={language} value={language}>
-            {language}
-          </option>
+          <option key={language}>{language}</option>
         ))}
       </select>
     </div>

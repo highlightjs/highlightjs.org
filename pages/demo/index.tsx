@@ -10,16 +10,23 @@ import styles from '../../styles/Demo.module.scss';
 interface Data {
   code: string;
   lang: string | null;
+  theme: string;
 }
 
-function persistToURL({ code, lang }: Data): void {
+const DEFAULT_THEME = 'atom-one-dark';
+
+function persistToURL({ code, lang, theme }: Data): void {
   const params = new URLSearchParams();
 
   if (lang !== null) {
     params.set('lang', lang);
   }
 
-  params.set('code', btoa(code));
+  params.set('theme', theme);
+
+  if (code.length > 0) {
+    params.set('code', btoa(code));
+  }
 
   window.location.hash = params.toString();
 }
@@ -30,23 +37,25 @@ function parseURL(): Data {
   return {
     lang: params.get('lang'),
     code: atob(params.get('code') ?? ''),
+    theme: params.get('theme') ?? DEFAULT_THEME,
   };
 }
 
 const Demo = () => {
   const [code, setCode] = useState('');
   const [lang, setLang] = useState<string | null>(null);
-  const [theme, setTheme] = useState<string | null>(null);
+  const [theme, setTheme] = useState<string>(DEFAULT_THEME);
 
   const handleShare = () => {
-    persistToURL({ code, lang });
+    persistToURL({ code, lang, theme });
   };
 
   useEffect(() => {
-    const { lang, code } = parseURL();
+    const { lang, code, theme } = parseURL();
 
     setCode(code);
     setLang(lang);
+    setTheme(theme);
   }, []);
 
   return (
@@ -58,10 +67,18 @@ const Demo = () => {
               <div className="d-flex mb-3">
                 <div className="row w-100">
                   <div className="col-md-6">
-                    <LanguageSelector className="w-100" onChange={setLang} />
+                    <LanguageSelector
+                      className="w-100"
+                      onChange={setLang}
+                      value={lang}
+                    />
                   </div>
                   <div className="col-md-6">
-                    <ThemeSelector className="w-100" onChange={setTheme} />
+                    <ThemeSelector
+                      className="w-100"
+                      onChange={setTheme}
+                      value={theme}
+                    />
                   </div>
                 </div>
 
