@@ -34,14 +34,14 @@ export const CodeBlock = ({
   const hljsTheme = themes.indexOf(theme) >= 0 ? theme : 'atom-one-dark';
 
   return (
-    <div className={[hljsTheme, styles.codeBlock, className].join(' ')}>
-      <pre className={`hljs mb-0 p-4 ${styles.hljsBlock}`}>
+    <pre className={[hljsTheme, styles.codeBlock, className].join(' ')}>
+      <span className={`hljs mb-0 p-4 ${styles.hljsBlock}`}>
         <code dangerouslySetInnerHTML={markup} />
-      </pre>
-      <p className={styles.tagLang}>
+      </span>
+      <small className={styles.tagLang}>
         <span className="sr-only">Language:</span>
         {result.language ?? language ?? 'text'}
-      </p>
-    </div>
+      </small>
+    </pre>
   );
 };
