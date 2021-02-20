@@ -1,4 +1,6 @@
+@import 'bs-api';
 @import 'variables';
+@import '~bootstrap/scss/utilities/text';
 
 html,
 body {
@@ -74,10 +76,6 @@ select {
   overflow: visible;
   clip: auto;
   white-space: normal;
-}
-
-.text-center {
-  text-align: center;
 }
 
 .w-100 {
