@@ -1,6 +1,8 @@
+@import '../styles/variables';
+
 .markdown {
   a {
-    color: yellow;
+    color: $palette-cyan;
     text-decoration: underline;
   }
 
