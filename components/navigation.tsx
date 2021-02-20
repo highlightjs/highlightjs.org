@@ -20,13 +20,13 @@ export const Navigation = () => (
     </Head>
 
     <nav className="row">
-      <div className="col-md-6">
+      <div className={`col-md-4 ${styles.titleContainer}`}>
         <span className={styles.wordMark}>
           <Link href="/">highlight.js</Link>
         </span>
       </div>
-      <div className="col-md-6">
-        <ul className={`mb-0 ${styles.navigation}`}>
+      <div className={`col-md-8 ${styles.navContainer}`}>
+        <ul className={styles.navigation}>
           {links.map((link, i) => (
             <li key={i}>{link}</li>
           ))}

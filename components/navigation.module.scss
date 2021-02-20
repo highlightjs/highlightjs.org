@@ -1,16 +1,36 @@
+@import '../styles/bs-api';
+
+.titleContainer {
+  text-align: center;
+
+  @include media-breakpoint-up(sm) {
+    text-align: left;
+  }
+}
+
+.navContainer {
+  display: flex;
+}
+
 .wordMark {
   font-size: 2.5rem;
   font-weight: bold;
 }
 
 .navigation {
+  margin: auto;
   padding-left: 0;
-  text-align: right;
+  text-align: center;
+
+  @include media-breakpoint-up(sm) {
+    margin-right: 0;
+    text-align: right;
+  }
 
   li {
     display: inline-block;
     font-size: 1.2em;
     font-weight: bold;
-    margin-left: 15px;
+    margin-left: 14px;
   }
 }
