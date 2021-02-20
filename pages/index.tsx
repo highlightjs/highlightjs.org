@@ -33,12 +33,12 @@ const Home = () => {
     <MainLayout>
       <div className="container">
         <div className="row align-items-center">
-          <div className="col-md-6">
+          <div className="col-lg-6 order-2 order-lg-1">
             <ul className={styles.sellingPoints}>
               <li>189 languages and 95 styles</li>
               <li>Automatic language detection</li>
               <li>Multi-language code highlighting</li>
-              <li>Available for node.js</li>
+              <li>Available for Node.js</li>
               <li>Works with any markup</li>
               <li>Compatible with any js framework</li>
             </ul>
@@ -46,7 +46,7 @@ const Home = () => {
               <strong>Current release:</strong> v10.2.1
             </p>
           </div>
-          <div className="col-md-6">
+          <div className="col-sm-10 offset-sm-1 offset-lg-0 col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0">
             <CodeBlock code={snippet} language={lang} />
           </div>
         </div>
@@ -55,7 +55,7 @@ const Home = () => {
       <LightBackground>
         <h2 className="mb-4 text-center">Trusted by</h2>
 
-        <ul className={`mb-3 ${styles.trustedBy}`}>
+        <ul className={styles.trustedBy}>
           <li>
             <img src="./stackoverflow.png" alt="Stackoverflow" />
           </li>
