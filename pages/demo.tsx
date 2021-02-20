@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import { CodeBlock } from '../../components/codeblock';
-import { DumbEditor } from '../../components/dumb-editor';
-import { LanguageSelector } from '../../components/language-selector';
-import { ThemeSelector } from '../../components/theme-selector';
-import { MainLayout } from '../../layouts/main';
-import styles from '../../styles/Demo.module.scss';
+import { CodeBlock } from '../components/codeblock';
+import { DumbEditor } from '../components/dumb-editor';
+import { LanguageSelector } from '../components/language-selector';
+import { ThemeSelector } from '../components/theme-selector';
+import { MainLayout } from '../layouts/main';
+import styles from '../styles/Demo.module.scss';
 
 interface Data {
   code: string;
