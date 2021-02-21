@@ -41,7 +41,7 @@ function parseFrontMatter(filename: string): NewsArticle {
 
 function parseGitHubApiResponse(release: any): NewsArticle {
   return {
-    url: release.url,
+    url: release.html_url,
     title: release.name,
     author: release.author.login,
     date: release.published_at,
