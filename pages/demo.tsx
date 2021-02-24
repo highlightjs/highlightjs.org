@@ -35,7 +35,7 @@ function parseURL(): Data {
   const params = new URLSearchParams(window.location.hash.substring(1));
 
   return {
-    lang: params.get('lang'),
+    lang: params.get('lang') ?? '',
     code: atob(params.get('code') ?? ''),
     theme: params.get('theme') ?? DEFAULT_THEME,
   };
