@@ -1,19 +1,26 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
+import hljs from 'highlight.js';
 import { useEffect, useState } from 'react';
 
 import { HTMLTagsExample } from '../components/cdn-block';
 import { CodeBlock } from '../components/codeblock';
 import { LightBackground } from '../components/lightbackground';
 import { Markdown } from '../components/markdown';
+import themes from '../data/themes.json';
 import { MainLayout } from '../layouts/main';
 import styles from '../styles/Home.module.scss';
 
 const SNIPPETS_DIR = path.resolve(process.cwd(), 'snippets');
+const THEME_COUNT = themes.length;
+const LANG_COUNT = hljs.listLanguages().length;
+
+const GH_API = 'https://api.github.com/repos/highlightjs/highlight.js/releases';
 
 interface Props {
   languages: string[];
+  latestVersion: string;
   snippets: Record<string, string>;
 }
 
@@ -22,8 +29,8 @@ function randInt(max) {
 }
 
 export async function getStaticProps() {
+  // Load our sample code snippets
   const snippets = {};
-
   fs.readdirSync(SNIPPETS_DIR).forEach((filename) => {
     const language = filename.replace('.txt', '');
     const filePath = path.resolve(SNIPPETS_DIR, filename);
@@ -31,15 +38,24 @@ export async function getStaticProps() {
     snippets[language] = fs.readFileSync(filePath, 'utf-8');
   });
 
+  // Load the latest version from GitHub
+  let currRelease = 'Unknown';
+  const ghResponse = await (await fetch(GH_API)).json();
+
+  if (ghResponse.length >= 1) {
+    currRelease = ghResponse[0].tag_name.replace('v', '');
+  }
+
   return {
     props: {
       languages: Object.keys(snippets),
+      latestVersion: currRelease,
       snippets,
     },
   };
 }
 
-const Home = ({ languages, snippets }: Props) => {
+const Home = ({ languages, latestVersion, snippets }: Props) => {
   const [snipIndex, setSnipIndex] = useState(0);
   const [lang, setLang] = useState(languages[snipIndex]);
   const [snippet, setSnippet] = useState(snippets[lang]);
@@ -60,7 +76,9 @@ const Home = ({ languages, snippets }: Props) => {
         <div className="row align-items-center">
           <div className="col-lg-6 order-2 order-lg-1">
             <ul className={styles.sellingPoints}>
-              <li>189 languages and 95 styles</li>
+              <li>
+                {LANG_COUNT} languages and {THEME_COUNT} styles
+              </li>
               <li>Automatic language detection</li>
               <li>Multi-language code highlighting</li>
               <li>Available for Node.js</li>
@@ -68,7 +86,7 @@ const Home = ({ languages, snippets }: Props) => {
               <li>Compatible with any js framework</li>
             </ul>
             <p>
-              <strong>Current release:</strong> v10.2.1
+              <strong>Current release:</strong> {latestVersion}
             </p>
           </div>
           <div className="col-sm-10 offset-sm-1 offset-lg-0 col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0">
@@ -120,7 +138,7 @@ const Home = ({ languages, snippets }: Props) => {
               `}
             />
 
-            <HTMLTagsExample className="my-4" version="10.6.0" />
+            <HTMLTagsExample className="my-4" version={latestVersion} />
 
             <Markdown
               body={`
