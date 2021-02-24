@@ -1,29 +1,54 @@
+import * as fs from 'fs';
+import * as path from 'path';
+
 import { useEffect, useState } from 'react';
 
 import { HTMLTagsExample } from '../components/cdn-block';
 import { CodeBlock } from '../components/codeblock';
 import { LightBackground } from '../components/lightbackground';
 import { Markdown } from '../components/markdown';
-import snippets from '../data/snippets.json';
 import { MainLayout } from '../layouts/main';
 import styles from '../styles/Home.module.scss';
 
-const snippetLanguages = Object.keys(snippets);
+const SNIPPETS_DIR = path.resolve(process.cwd(), 'snippets');
+
+interface Props {
+  languages: string[];
+  snippets: Record<string, string>;
+}
 
 function randInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-const Home = () => {
+export async function getStaticProps() {
+  const snippets = {};
+
+  fs.readdirSync(SNIPPETS_DIR).forEach((filename) => {
+    const language = filename.replace('.txt', '');
+    const filePath = path.resolve(SNIPPETS_DIR, filename);
+
+    snippets[language] = fs.readFileSync(filePath, 'utf-8');
+  });
+
+  return {
+    props: {
+      languages: Object.keys(snippets),
+      snippets,
+    },
+  };
+}
+
+const Home = ({ languages, snippets }: Props) => {
   const [snipIndex, setSnipIndex] = useState(0);
-  const [lang, setLang] = useState(snippetLanguages[snipIndex]);
+  const [lang, setLang] = useState(languages[snipIndex]);
   const [snippet, setSnippet] = useState(snippets[lang]);
 
-  const randomizeSnippet = () => setSnipIndex(randInt(snippetLanguages.length));
+  const randomizeSnippet = () => setSnipIndex(randInt(languages.length));
 
   useEffect(randomizeSnippet, []);
   useEffect(() => {
-    const language = snippetLanguages[snipIndex];
+    const language = languages[snipIndex];
 
     setLang(language);
     setSnippet(snippets[language]);
