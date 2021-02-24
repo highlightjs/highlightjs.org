@@ -16,7 +16,7 @@ export const LanguageSelector = ({ className, onChange, value }: Props) => {
   return (
     <div className={className}>
       <label htmlFor="lang-selector">Language</label>
-      <select id="lang-selector" onChangeCapture={handleOnChange} value={value}>
+      <select id="lang-selector" onChange={handleOnChange} value={value}>
         {['(auto)', ...hljs.listLanguages()].map((language) => (
           <option key={language}>{language}</option>
         ))}

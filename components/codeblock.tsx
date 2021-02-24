@@ -16,7 +16,7 @@ function createMarkup(result: HighlightResult): { __html: string } {
 }
 
 function highlight(code: string, language: string | null): HighlightResult {
-  if (language === null) {
+  if (language === null || language.trim() === '') {
     return hljs.highlightAuto(code);
   }
 

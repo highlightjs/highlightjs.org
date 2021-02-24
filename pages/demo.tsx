@@ -43,7 +43,7 @@ function parseURL(): Data {
 
 const Demo = () => {
   const [code, setCode] = useState('');
-  const [lang, setLang] = useState<string | null>(null);
+  const [lang, setLang] = useState<string>('');
   const [theme, setTheme] = useState<string>(DEFAULT_THEME);
 
   const handleShare = () => {
@@ -65,14 +65,14 @@ const Demo = () => {
           <div className={`col-lg-6 mb-3 mb-lg-0 ${styles.editorSection}`}>
             <div className={styles.stickyWrapper}>
               <div className="d-md-flex mb-3">
-                <div className="flex-md-grow-1 mb-3 mb-md-0 pr-3">
+                <div className="flex-md-grow-1 mb-3 mb-md-0 pr-md-3">
                   <LanguageSelector
                     className="w-100"
                     onChange={setLang}
                     value={lang}
                   />
                 </div>
-                <div className="flex-md-grow-1 mb-3 mb-md-0 pr-3">
+                <div className="flex-md-grow-1 mb-3 mb-md-0 pr-md-3">
                   <ThemeSelector
                     className="w-100"
                     onChange={setTheme}
