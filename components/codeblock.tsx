@@ -32,6 +32,7 @@ export const CodeBlock = ({
   const result = highlight(code, language);
   const markup = createMarkup(result);
   const hljsTheme = themes.indexOf(theme) >= 0 ? theme : 'atom-one-dark';
+  const name = hljs.getLanguage(result.language);
 
   return (
     <pre className={[hljsTheme, styles.codeBlock, className].join(' ')}>
@@ -40,7 +41,7 @@ export const CodeBlock = ({
       </span>
       <small className={styles.tagLang}>
         <span className="sr-only">Language:</span>
-        {result.language ?? language ?? 'text'}
+        {name?.name || language || 'text'}
       </small>
     </pre>
   );
