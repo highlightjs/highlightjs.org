@@ -12,11 +12,37 @@ import themes from '../data/themes.json';
 import { MainLayout } from '../layouts/main';
 import styles from '../styles/Home.module.scss';
 
-const SNIPPETS_DIR = path.resolve(process.cwd(), 'snippets');
+const SNIPPETS_DIR = path.resolve(process.cwd(), 'data', 'snippets');
 const THEME_COUNT = themes.length;
 const LANG_COUNT = hljs.listLanguages().length;
 
 const GH_API = 'https://api.github.com/repos/highlightjs/highlight.js/releases';
+const SNIPPETS = [
+  'bash',
+  'clojure',
+  'coffeescript',
+  'cpp',
+  'csharp',
+  'css',
+  'elm',
+  'go',
+  'handlebars',
+  'http',
+  'ini',
+  'java',
+  'javascript',
+  'json',
+  'makefile',
+  'objectivec',
+  'prolog',
+  'python',
+  'ruby',
+  'rust',
+  'sql',
+  'swift',
+  'typescript',
+  'xml',
+];
 
 interface Props {
   languages: string[];
@@ -31,10 +57,9 @@ function randInt(max) {
 export async function getStaticProps() {
   // Load our sample code snippets
   const snippets = {};
-  fs.readdirSync(SNIPPETS_DIR).forEach((filename) => {
-    const language = filename.replace('.txt', '');
-    const filePath = path.resolve(SNIPPETS_DIR, filename);
 
+  SNIPPETS.forEach((language) => {
+    const filePath = path.resolve(SNIPPETS_DIR, `${language}.txt`);
     snippets[language] = fs.readFileSync(filePath, 'utf-8');
   });
 
@@ -90,7 +115,11 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
             </p>
           </div>
           <div className="col-sm-10 offset-sm-1 offset-lg-0 col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0">
-            <CodeBlock code={snippet} language={lang} />
+            <CodeBlock
+              code={snippet}
+              language={lang}
+              className={styles.sampleSnippet}
+            />
           </div>
         </div>
       </div>
