@@ -21,16 +21,19 @@ fs.readdirSync(stylesDir).forEach((filename) => {
     return;
   }
 
-  const themeName = filename.replace('.css', '');
+  const themeName = filename
+    .replace('.css', '')
+    .replace(/[^\w-]+/, '-')
+    .replace(/-$/, '');
   const contents = fs.readFileSync(filePath, 'utf-8');
-
-  const wrapped = `
-    .${themeName} {
-      ${contents}
-    }
-  `;
-  const compiled = sass.renderSync({ data: wrapped, outputStyle: 'compressed' })
-    .css;
+  const compiled = sass.renderSync({
+    data: `
+      .${themeName} {
+        ${contents}
+      }
+    `,
+    outputStyle: 'compressed',
+  }).css;
 
   fs.appendFileSync(outputCss, compiled.toString());
 
