@@ -1,30 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# highlightjs.org
 
-## Getting Started
+Welcome to the second iteration of our beloved highlightjs.org website! This website is built using Next.js and is designed to be an entirely static website that can be hosted on GitHub pages.
 
-First, run the development server:
+## Development
+
+This website requires the highlight.js repo to be cloned and a few extra things to be built.
 
 ```bash
-npm run dev
-# or
+# Initial Setup
+yarn install
+yarn clone
+yarn themes
+
+# Future development
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Production
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+The production version of the website will be built into the `out` folder.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+yarn install
+yarn dist
+```
