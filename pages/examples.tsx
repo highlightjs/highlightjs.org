@@ -227,6 +227,7 @@ Object.keys(LANG_CATS).forEach((category) => {
 
 interface Props {
   snippets: Record<string, string>;
+  totalCount: number;
 }
 
 export async function getStaticProps() {
@@ -247,16 +248,17 @@ export async function getStaticProps() {
   return {
     props: {
       snippets,
+      totalCount: Object.keys(snippets).length,
     },
   };
 }
 
-const Examples = ({ snippets }: Props) => {
+const Examples = ({ snippets, totalCount }: Props) => {
   const [theme, setTheme] = useState('atom-one-dark');
-  const [category, setCategory] = useState('all');
+  const [filter, setFilter] = useState('all');
 
-  const handleRadio = (e: SyntheticEvent<HTMLInputElement>) => {
-    setCategory(e.currentTarget.value.toLowerCase());
+  const handleRadio = (e: SyntheticEvent<HTMLSelectElement>) => {
+    setFilter(e.currentTarget.value);
   };
 
   return (
@@ -266,36 +268,39 @@ const Examples = ({ snippets }: Props) => {
           <div className="col-lg-3 position-relative">
             <div className={styles.sidebar}>
               <h1>Examples</h1>
-              <ThemeSelector onChange={setTheme} value={theme} />
-              <fieldset>
-                <legend>Language Category</legend>
-                <label>
-                  <input
-                    type="radio"
-                    name="language-category"
-                    onChange={handleRadio}
-                    value="all"
-                  />{' '}
-                  All
-                </label>
-                {Object.keys(LANG_CATS).map((category) => (
-                  <label>
-                    <input
-                      type="radio"
-                      name="language-category"
-                      onChange={handleRadio}
-                      value={category}
-                    />{' '}
-                    {category}
-                  </label>
-                ))}
-              </fieldset>
+
+              <div>
+                <label htmlFor="language-category">Language Category</label>
+                <select
+                  id="language-category"
+                  className={styles.languageCategories}
+                  value={filter}
+                  onChange={handleRadio}
+                >
+                  <option value="all">All ({totalCount})</option>
+                  {Object.keys(LANG_CATS).map((category) => (
+                    <option key={category} value={category.toLowerCase()}>
+                      {category} ({LANG_CATS[category].length})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <ThemeSelector
+                className="mb-3"
+                onChange={setTheme}
+                value={theme}
+              />
             </div>
           </div>
+
           <div className="col-lg-9">
-            <section className={styles[`show-${category}`]}>
+            <section className={styles[`show-${filter}`]}>
               {Object.keys(snippets).map((language) => (
-                <div data-category={__LANG_LOOKUP[language]?.toLowerCase()}>
+                <div
+                  key={language}
+                  data-category={__LANG_LOOKUP[language]?.toLowerCase()}
+                >
                   <CodeBlock
                     className={styles.sampleSnippet}
                     code={snippets[language]}

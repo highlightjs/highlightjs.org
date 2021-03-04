@@ -8,6 +8,20 @@
   top: 1rem;
 }
 
+.languageCategories {
+  margin-bottom: 1rem;
+
+  legend {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  label {
+    display: inline-block;
+    margin-right: 1rem;
+  }
+}
+
 $categories: (
   'assembler',
   'common',
