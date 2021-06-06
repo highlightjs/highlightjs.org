@@ -5,7 +5,9 @@ $background-color: #282c34;
 }
 
 .tabs {
+  overflow: auto;
   position: relative;
+  white-space: nowrap;
   z-index: 100;
 }
 
