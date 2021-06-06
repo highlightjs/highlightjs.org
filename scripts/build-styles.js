@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const sass = require('sass');
 
-const stylesDir = __dirname + '/../highlight.js/build/styles/';
+const stylesDir = __dirname + '/../highlight.js/src/styles/';
 const outputDir = __dirname + '/../data/';
 const outputCss = outputDir + 'themes.css';
 const outputThemes = outputDir + 'themes.json';
