@@ -35,7 +35,9 @@ export const CodeBlock = ({
   const name = hljs.getLanguage(result.language);
 
   return (
-    <pre className={[`theme-${hljsTheme}`, styles.codeBlock, className].join(' ')}>
+    <pre
+      className={[`theme-${hljsTheme}`, styles.codeBlock, className].join(' ')}
+    >
       <span className={`hljs mb-0 p-4 ${styles.hljsBlock}`}>
         <code dangerouslySetInnerHTML={markup} />
       </span>
