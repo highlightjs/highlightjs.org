@@ -5,7 +5,9 @@
 }
 
 .hljsBlock {
+  display: block;
   min-height: 100%;
+  overflow: auto;
 }
 
 .tagLang {
