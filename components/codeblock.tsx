@@ -1,4 +1,4 @@
-import hljs from 'highlight.js';
+import hljs, { HighlightResult } from 'highlight.js';
 import React from 'react';
 
 import themes from '../data/themes.json';
@@ -20,7 +20,7 @@ function highlight(code: string, language: string | null): HighlightResult {
     return hljs.highlightAuto(code);
   }
 
-  return hljs.highlight(language, code);
+  return hljs.highlight(code, { language });
 }
 
 export const CodeBlock = ({
@@ -35,7 +35,7 @@ export const CodeBlock = ({
   const name = hljs.getLanguage(result.language);
 
   return (
-    <pre className={[hljsTheme, styles.codeBlock, className].join(' ')}>
+    <pre className={[`theme-${hljsTheme}`, styles.codeBlock, className].join(' ')}>
       <span className={`hljs mb-0 p-4 ${styles.hljsBlock}`}>
         <code dangerouslySetInnerHTML={markup} />
       </span>
