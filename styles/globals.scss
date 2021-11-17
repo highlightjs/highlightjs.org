@@ -13,21 +13,10 @@ body {
 
 body {
   background: $palette-red;
-
-  // A CSS Triangle
-  &::before {
-    border-color: $palette-grey transparent transparent transparent;
-    border-style: solid;
-    border-width: 1200px 85vw 0 0;
-    content: '';
-    display: block;
-    height: 0;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 0;
-    z-index: -1;
-  }
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgOTUuMyA5NS4zIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wIDk1LjMgOTUuMyAwSDB6IiBmaWxsPSIjMmYzMTMwIi8+PC9zdmc+");
+  background-size: 85vw, 1200px, cover;
+  background-repeat: no-repeat;
+  background-position: top left;
 }
 
 a {
