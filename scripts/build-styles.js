@@ -13,12 +13,12 @@ if (fs.existsSync(outputCss)) {
   fs.unlinkSync(outputCss);
 }
 
-function walkStylesDir(directory, prefix = null) {
+function walkStylesDir(directory, prefix = '') {
   fs.readdirSync(directory).forEach((filename) => {
     const filePath = path.join(directory, filename);
 
     if (fs.lstatSync(filePath).isDirectory()) {
-      walkStylesDir(filePath, filename);
+      walkStylesDir(filePath, (prefix ? prefix + '-' : '') + filename);
 
       return;
     }
@@ -29,10 +29,13 @@ function walkStylesDir(directory, prefix = null) {
       return;
     }
 
-    const themeName = filename
+    let themeName = filename
       .replace('.css', '')
       .replace(/[^\w-]+/, '-')
       .replace(/-$/, '');
+    if (prefix) {
+      themeName = `${prefix}-${themeName}`;
+    }
     const contents = fs.readFileSync(filePath, 'utf-8');
     const compiled = sass.renderSync({
       data: `
