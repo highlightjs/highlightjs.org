@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import * as lz from 'lzutf8';
 
 import { CodeBlock } from '../components/codeblock';
 import { DumbEditor } from '../components/dumb-editor';
@@ -8,11 +9,13 @@ import { MainLayout } from '../layouts/main';
 import styles from '../styles/Demo.module.scss';
 
 interface Data {
+  v: number;
   code: string;
   lang: string | null;
   theme: string;
 }
 
+const URL_FMT_VER = 1;
 const DEFAULT_THEME = 'atom-one-dark';
 
 function persistToURL({ code, lang, theme }: Data): void {
@@ -22,10 +25,11 @@ function persistToURL({ code, lang, theme }: Data): void {
     params.set('lang', lang);
   }
 
+  params.set('v', '' + URL_FMT_VER);
   params.set('theme', theme);
 
   if (code.length > 0) {
-    params.set('code', btoa(code));
+    params.set('code', lz.compress(code, { outputEncoding: 'Base64' }));
   }
 
   window.location.hash = params.toString();
@@ -35,8 +39,9 @@ function parseURL(): Data {
   const params = new URLSearchParams(window.location.hash.substring(1));
 
   return {
+    v: +params.get('v') ?? URL_FMT_VER,
     lang: params.get('lang') ?? '',
-    code: atob(params.get('code') ?? ''),
+    code: lz.decompress(params.get('code') ?? '', { inputEncoding: 'Base64'}),
     theme: params.get('theme') ?? DEFAULT_THEME,
   };
 }
@@ -47,7 +52,7 @@ const Demo = () => {
   const [theme, setTheme] = useState<string>(DEFAULT_THEME);
 
   const handleShare = () => {
-    persistToURL({ code, lang, theme });
+    persistToURL({ v: 1, code, lang, theme });
   };
 
   useEffect(() => {
