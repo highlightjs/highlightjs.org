@@ -12,6 +12,7 @@
     "format": "prettier --list-different --write \"{.github,components,layouts,pages,scripts,styles}/**/*.{css,js,jsx,mdx,ts,tsx,scss,yaml,yml}\""
   },
   "dependencies": {
+    "@allejo/react-position-sticky": "^1.0.0-rc.1",
     "bootstrap": "^4.5.2",
     "dedent": "^0.7.0",
     "gray-matter": "^4.0.2",

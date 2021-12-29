@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import * as lz from 'lzutf8';
+import React, { useEffect, useState } from 'react';
 
 import { CodeBlock } from '../components/codeblock';
 import { DumbEditor } from '../components/dumb-editor';
@@ -41,7 +41,7 @@ function parseURL(): Data {
   return {
     v: +params.get('v') ?? URL_FMT_VER,
     lang: params.get('lang') ?? '',
-    code: lz.decompress(params.get('code') ?? '', { inputEncoding: 'Base64'}),
+    code: lz.decompress(params.get('code') ?? '', { inputEncoding: 'Base64' }),
     theme: params.get('theme') ?? DEFAULT_THEME,
   };
 }
@@ -86,7 +86,10 @@ const Demo = () => {
                 </div>
 
                 <div className="ml-auto mt-auto">
-                  <button className={styles.shareButton} onClick={handleShare}>
+                  <button
+                    className={['button', styles.shareButton].join(' ')}
+                    onClick={handleShare}
+                  >
                     Share
                   </button>
                 </div>
