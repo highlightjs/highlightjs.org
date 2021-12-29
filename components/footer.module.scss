@@ -1,5 +1,4 @@
 @import '../styles/bs-api';
-@import '../styles/variables';
 
 .extraLinks {
   display: grid;
@@ -28,7 +27,7 @@
   a {
     &:focus,
     &:hover {
-      color: $palette-cyan;
+      color: var(--color-cyan);
       text-decoration: underline;
     }
   }

@@ -1,10 +1,29 @@
 @import 'bs-api';
-@import 'variables';
 @import '~bootstrap/scss/utilities/text';
+
+:root {
+  $palette-cyan: #85d0d7;
+  $palette-green: #008000;
+  $palette-grey: #2f3130;
+
+  --color-black: #000;
+  --color-cyan: #{$palette-cyan};
+  --color-dark-cyan: #{darken($palette-cyan, 45%)};
+  --color-green: #{$palette-green};
+  --color-dark-green: #{darken($palette-green, 10%)};
+  --color-grey: #{$palette-grey};
+  --color-light-grey: #{lighten($palette-grey, 5%)};
+  --color-red: #512222;
+  --color-off-white: #767676;
+  --color-white: #ffffff;
+
+  --border: 1px solid var(--color-off-white);
+  --border-radius: 5px;
+}
 
 html,
 body {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   margin: 0;
@@ -12,8 +31,8 @@ body {
 }
 
 body {
-  background: $palette-red;
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgOTUuMyA5NS4zIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wIDk1LjMgOTUuMyAwSDB6IiBmaWxsPSIjMmYzMTMwIi8+PC9zdmc+");
+  background: var(--color-red);
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgOTUuMyA5NS4zIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wIDk1LjMgOTUuMyAwSDB6IiBmaWxsPSIjMmYzMTMwIi8+PC9zdmc+');
   background-size: 85vw, 1200px, cover;
   background-repeat: no-repeat;
   background-position: top left;
@@ -29,20 +48,47 @@ label {
   font-weight: bold;
 }
 
-select {
-  $arrow-color: white;
+input[type='text'],
+textarea {
+  background-color: var(--color-light-grey);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  color: var(--color-white);
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  width: 100%;
+}
 
+select {
   appearance: none;
-  background-color: $palette-light-grey;
+  background-color: var(--color-light-grey);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 16px 12px;
   border-radius: 5px;
-  color: white;
+  color: var(--color-white);
   cursor: pointer;
   padding: 0.5rem 2.25rem 0.5rem 0.75rem;
   width: 100%;
+}
+
+.button {
+  background-color: var(--color-green);
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+
+  &:focus,
+  &:hover {
+    background-color: var(--color-dark-green);
+  }
+}
+
+.position-relative {
+  position: relative;
 }
 
 .sr-only {
@@ -69,4 +115,8 @@ select {
 
 .w-100 {
   width: 100%;
+}
+
+.ws-nowrap {
+  white-space: nowrap;
 }

@@ -1,5 +1,4 @@
 @import '../styles/bs-api';
-@import '../styles/variables';
 
 .titleContainer {
   text-align: center;
@@ -20,7 +19,7 @@
 
     &:hover,
     &:focus {
-      color: $palette-cyan;
+      color: var(--color-cyan);
     }
   }
 }
