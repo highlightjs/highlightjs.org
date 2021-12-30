@@ -1,57 +1,77 @@
 import { StickyElement, StickyViewport } from '@allejo/react-position-sticky';
-import { SyntheticEvent, useEffect, useRef, useState } from 'react';
+import hljs from 'highlight.js';
+import {
+  SyntheticEvent,
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
+import SearchableText from '../components/searchable-text';
 import { MainLayout } from '../layouts/main';
 import styles from '../styles/Download.module.scss';
-import { removeFirst } from '../utilities/arrayUtils';
 import { LANG_CATS } from '../utilities/constants';
+import { classList } from '../utilities/cssClasses';
+import { removeFirst } from '../utilities/utilities';
 
-interface LanguageListProps {
-  languages: string[];
-  onLanguageRemoval: (language: string) => void;
-}
-
-const LanguageList = ({ languages, onLanguageRemoval }: LanguageListProps) => (
-  <div className="d-flex flex-column flex-md-row mt-3">
-    <p id="language-list" className="font-weight-bold mb-2 mb-md-0 mr-2 ws-nowrap">
-      Selected Languages:
-    </p>
-    {languages.length === 0 ? (
-      <span>
-        <em>None Selected</em>
-      </span>
-    ) : (
-      <ul className={styles.selectedLanguages} aria-describedby="language-list">
-        {languages.map((language) => (
-          <li key={language} className={styles.selectedLanguage}>
-            {language}
-            <button onClick={() => onLanguageRemoval(language)}>&times;</button>
-          </li>
-        ))}
-      </ul>
-    )}
-  </div>
-);
-
-interface BundlerControlsProps {
+interface PageContext {
+  addLanguage: (lang: string) => void;
+  delLanguage: (lang: string) => void;
   filter: string;
-  includedLanguages: string[];
-  onDownloadClick: () => void;
-  onFilterChange: (filter: string) => void;
-  onLanguageRemoval: (language: string) => void;
+  selectedLanguages: string[];
+  setFilter: (filter: string) => void;
 }
 
-const BundlerControls = ({
-  filter,
-  includedLanguages,
-  onDownloadClick,
-  onFilterChange,
-  onLanguageRemoval,
-}: BundlerControlsProps) => {
+const PageContext = createContext<PageContext>({
+  addLanguage: () => {},
+  delLanguage: () => {},
+  filter: '',
+  selectedLanguages: [],
+  setFilter: () => {},
+});
+
+const LanguageList = () => {
+  const { delLanguage, selectedLanguages } = useContext(PageContext);
+
+  return (
+    <div className="d-flex flex-column flex-md-row mt-3">
+      <p
+        id="language-list"
+        className="font-weight-bold mb-2 mb-md-0 mr-2 ws-nowrap"
+      >
+        Selected Languages:
+      </p>
+      {selectedLanguages.length === 0 ? (
+        <span>
+          <em>None Selected</em>
+        </span>
+      ) : (
+        <ul
+          className={styles.selectedLanguages}
+          aria-describedby="language-list"
+        >
+          {selectedLanguages.map((language) => (
+            <li key={language} className={styles.selectedLanguage}>
+              {language}
+              <button onClick={() => delLanguage(language)}>&times;</button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+const BundlerControls = () => {
+  const { filter, setFilter, selectedLanguages } = useContext(PageContext);
+
   const containerRef = useRef<HTMLDivElement>();
   const [height, setHeight] = useState(0);
-  const handleInputOnChange = (e: SyntheticEvent<HTMLInputElement>) => {
-    onFilterChange(e.currentTarget.value);
+
+  const handleFilterChange = (e: SyntheticEvent<HTMLInputElement>) => {
+    setFilter(e.currentTarget.value);
   };
 
   useEffect(() => {
@@ -60,7 +80,7 @@ const BundlerControls = ({
     }
 
     setHeight(containerRef.current.offsetHeight);
-  }, [includedLanguages]);
+  }, [selectedLanguages]);
 
   return (
     <>
@@ -78,22 +98,116 @@ const BundlerControls = ({
               type="text"
               className="form-control"
               placeholder="Search languages..."
-              onChange={handleInputOnChange}
+              onChange={handleFilterChange}
               value={filter}
             />
           </div>
           <div className="pl-3">
-            <button type="submit" className="button" onChange={onDownloadClick}>
+            <button type="submit" className="button">
               Download
             </button>
           </div>
         </div>
-        <LanguageList
-          languages={includedLanguages}
-          onLanguageRemoval={onLanguageRemoval}
-        />
+        <LanguageList />
       </div>
     </>
+  );
+};
+
+interface LanguageCheckboxProps {
+  language: string;
+  onFilterResults: (language: string, matched: boolean) => void;
+}
+
+const LanguageCheckbox = ({
+  language,
+  onFilterResults,
+}: LanguageCheckboxProps) => {
+  const { addLanguage, delLanguage, filter, selectedLanguages } = useContext(
+    PageContext,
+  );
+  const isFilterActive = !!filter;
+
+  const [matchFound, setMatchFound] = useState(false);
+  const handleLanguageSelection = (event: SyntheticEvent<HTMLInputElement>) => {
+    if (event.currentTarget.checked) {
+      addLanguage(language);
+    } else {
+      delLanguage(language);
+    }
+  };
+
+  useEffect(() => onFilterResults(language, matchFound), [matchFound]);
+
+  return (
+    <label
+      className={classList([
+        'col-6',
+        'col-md-3',
+        ['d-none', isFilterActive && !matchFound],
+      ])}
+      key={language}
+    >
+      <input
+        type="checkbox"
+        className="mr-2"
+        checked={selectedLanguages.indexOf(language) >= 0}
+        onChange={handleLanguageSelection}
+        value={language}
+      />
+      <SearchableText
+        aliases={hljs.getLanguage(language)?.aliases}
+        filter={filter}
+        onMatch={setMatchFound}
+        text={language}
+      />
+    </label>
+  );
+};
+
+interface LanguageCategoryProps {
+  category: string;
+}
+
+const LanguageCategory = ({ category }: LanguageCategoryProps) => {
+  const [hasMatches, setHasMatches] = useState(false);
+  const [langMatches, setLangMatches] = useState<Record<string, boolean>>({});
+  const { filter } = useContext(PageContext);
+
+  const isFilterActive = !!filter;
+
+  const handleFilterResults = (lang: string, matched: boolean) => {
+    setLangMatches((prevState) => ({
+      ...prevState,
+      [lang]: matched,
+    }));
+  };
+
+  useEffect(() => {
+    if (!isFilterActive) {
+      return;
+    }
+
+    setHasMatches(Object.values(langMatches).some((v) => v === true));
+  }, [langMatches]);
+
+  return (
+    <fieldset
+      key={category}
+      className={isFilterActive && !hasMatches ? 'd-none' : ''}
+    >
+      <legend>{category}</legend>
+
+      <div className="row">
+        {LANG_CATS[category].map((language) => (
+          <LanguageCheckbox
+            key={language}
+            language={language}
+            onFilterResults={handleFilterResults}
+          />
+        ))}
+      </div>
+    </fieldset>
   );
 };
 
@@ -101,71 +215,52 @@ const Download = () => {
   const [filter, setFilter] = useState('');
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
 
-  const handleLanguageSelection = (event: SyntheticEvent<HTMLInputElement>) => {
-    const lang = event.currentTarget.value;
+  const addLanguage = (language: string) => {
+    const newLanguages = [...selectedLanguages, language];
+    newLanguages.sort();
 
-    if (event.currentTarget.checked) {
-      const newLanguages = [...selectedLanguages, lang];
-      newLanguages.sort();
-
-      setSelectedLanguages(newLanguages);
-    } else {
-      setSelectedLanguages(removeFirst(selectedLanguages, lang));
-    }
+    setSelectedLanguages(newLanguages);
   };
-  const handleLanguageRemoval = (language: string) => {
+  const delLanguage = (language: string) => {
     setSelectedLanguages(removeFirst(selectedLanguages, language));
   };
 
   return (
     <MainLayout>
       <StickyViewport useBrowserViewport={true}>
-        <div className="container position-relative">
-          <h1 className="lh-1">Download a Custom Build</h1>
+        <PageContext.Provider
+          value={{
+            addLanguage,
+            delLanguage,
+            filter,
+            selectedLanguages,
+            setFilter,
+          }}
+        >
+          <div className="container position-relative">
+            <h1 className="lh-1">Download a Custom Build</h1>
 
-          <form className="position-relative" method="POST">
-            <StickyElement
-              id="bundle-header"
-              sentinels={{
-                top: { height: '1rem', top: '-1rem' },
-                bottom: { height: '50px' },
-              }}
-            >
-              <section className={styles.bundleHeader}>
-                <BundlerControls
-                  filter={filter}
-                  includedLanguages={selectedLanguages}
-                  onDownloadClick={() => {}}
-                  onFilterChange={setFilter}
-                  onLanguageRemoval={handleLanguageRemoval}
-                />
+            <form className="position-relative" method="POST">
+              <StickyElement
+                id="bundle-header"
+                sentinels={{
+                  top: { height: '1rem', top: '-1rem' },
+                  bottom: { height: '50px' },
+                }}
+              >
+                <section className={styles.bundleHeader}>
+                  <BundlerControls />
+                </section>
+              </StickyElement>
+
+              <section className={styles.languagesContainer}>
+                {Object.keys(LANG_CATS).map((category) => (
+                  <LanguageCategory key={category} category={category} />
+                ))}
               </section>
-            </StickyElement>
-
-            <section className={styles.languagesContainer}>
-              {Object.keys(LANG_CATS).map((category) => (
-                <fieldset key={category}>
-                  <legend>{category}</legend>
-
-                  <div className="row">
-                    {LANG_CATS[category].map((language) => (
-                      <label className="col-6 col-md-3" key={language}>
-                        <input
-                          type="checkbox"
-                          className="mr-2"
-                          checked={selectedLanguages.indexOf(language) >= 0}
-                          onChange={handleLanguageSelection}
-                          value={language}
-                        />
-                        <span>{language}</span>
-                      </label>
-                    ))}
-                  </div>
-                </fieldset>
-              ))}
-            </section>
-          </form>
-        </div>
+            </form>
+          </div>
+        </PageContext.Provider>
       </StickyViewport>
     </MainLayout>
   );
