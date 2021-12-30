@@ -12,8 +12,8 @@ interface LanguageListProps {
 }
 
 const LanguageList = ({ languages, onLanguageRemoval }: LanguageListProps) => (
-  <div className="d-flex mt-3">
-    <p id="language-list" className="font-weight-bold mb-0 mr-2 ws-nowrap">
+  <div className="d-flex flex-column flex-md-row mt-3">
+    <p id="language-list" className="font-weight-bold mb-2 mb-md-0 mr-2 ws-nowrap">
       Selected Languages:
     </p>
     {languages.length === 0 ? (
@@ -121,7 +121,7 @@ const Download = () => {
     <MainLayout>
       <StickyViewport useBrowserViewport={true}>
         <div className="container position-relative">
-          <h1>Download a Custom Build</h1>
+          <h1 className="lh-1">Download a Custom Build</h1>
 
           <form className="position-relative" method="POST">
             <StickyElement
@@ -149,7 +149,7 @@ const Download = () => {
 
                   <div className="row">
                     {LANG_CATS[category].map((language) => (
-                      <label className="col-3" key={language}>
+                      <label className="col-6 col-md-3" key={language}>
                         <input
                           type="checkbox"
                           className="mr-2"
