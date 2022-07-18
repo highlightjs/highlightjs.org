@@ -1,7 +1,9 @@
 import { StickyElement, StickyViewport } from '@allejo/react-position-sticky';
+import { saveAs } from 'file-saver';
 import hljs from 'highlight.js';
 import { GetServerSideProps } from 'next';
 import {
+  FormEvent,
   SyntheticEvent,
   createContext,
   useContext,
@@ -169,7 +171,7 @@ const LanguageCheckbox = ({
     >
       <input
         type="checkbox"
-        name="language"
+        name="languages"
         className="mr-2"
         checked={selectedLanguages.indexOf(language) >= 0}
         onChange={handleLanguageSelection}
@@ -245,6 +247,30 @@ const Download = () => {
     setSelectedLanguages(removeFirst(selectedLanguages, language));
   };
 
+  const handleOnSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const languages = formData.getAll('languages');
+
+    fetch('/api/download', {
+      method: 'POST',
+      body: JSON.stringify({
+        api: 2,
+        languages,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.blob())
+      .then((response) => {
+        const blob = new Blob([response], { type: 'application/json' });
+
+        saveAs(blob, 'highlight.zip');
+      });
+  };
+
   return (
     <MainLayout>
       <StickyViewport useBrowserViewport={true}>
@@ -260,7 +286,7 @@ const Download = () => {
           <div className="container position-relative">
             <h1 className="lh-1">Download a Custom Build</h1>
 
-            <form className="position-relative" method="POST">
+            <form className="position-relative" onSubmit={handleOnSubmit}>
               <StickyElement
                 id="bundle-header"
                 sentinels={{

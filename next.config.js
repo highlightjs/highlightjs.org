@@ -16,4 +16,7 @@ module.exports = {
       permanent: true,
     },
   ],
+  serverRuntimeConfig: {
+    PROJECT_ROOT: __dirname,
+  },
 };
