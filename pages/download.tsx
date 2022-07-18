@@ -1,5 +1,6 @@
 import { StickyElement, StickyViewport } from '@allejo/react-position-sticky';
 import hljs from 'highlight.js';
+import { GetServerSideProps } from 'next';
 import {
   SyntheticEvent,
   createContext,
@@ -15,6 +16,24 @@ import styles from '../styles/Download.module.scss';
 import { LANG_CATS } from '../utilities/constants';
 import { classList } from '../utilities/cssClasses';
 import { removeFirst } from '../utilities/utilities';
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  // For backward compatability, redirect any POST requests made the `/download`
+  // URL that was used by the Django version of this website; the new URL is a
+  // Next.js API route.
+  if (req.method === 'POST') {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/api/download',
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
 
 interface PageContext {
   addLanguage: (lang: string) => void;
@@ -150,6 +169,7 @@ const LanguageCheckbox = ({
     >
       <input
         type="checkbox"
+        name="language"
         className="mr-2"
         checked={selectedLanguages.indexOf(language) >= 0}
         onChange={handleLanguageSelection}
