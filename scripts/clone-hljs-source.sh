@@ -30,10 +30,9 @@ get_code_snippets() {
 
 build_hljs_download() {
   # The Heroku deployment pipeline sets NODE_ENV to production, meaning that
-  # running this secondary npm command will not install the build tools (via dev
-  # dependencies) needed to build highlight.js. Let's explicitly install dev deps
-  # after regular dependencies have been installed.
-  npm install && npm install --only=dev
+  # we need to be explicit about installing dev dependencies for highlight.js
+  # otherwise they won't get installed.
+  npm install --production=false
 
   # Build highlight.js in CDN mode so that we have each language in their own
   # file that can be concatenated.
