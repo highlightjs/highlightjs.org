@@ -10,7 +10,7 @@ import { makeZip } from '../../utilities/zip';
 const { serverRuntimeConfig } = getConfig();
 const { PROJECT_ROOT } = serverRuntimeConfig;
 
-// const HLJS_CACHE = path.join(PROJECT_ROOT, 'highlight.js/');
+const HLJS_CACHE = path.resolve(PROJECT_ROOT + '/data/bundle-cache.zip');
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   let apiVersion: number | null;
@@ -56,11 +56,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.setHeader('Content-Disposition', 'attachment; filename=highlight.zip');
 
   const langBundle = getMinifiedBundle(languages);
-  const zip = makeZip({
-    highlight: {
-      'highlight.min.js': langBundle,
+  const zip = await makeZip(
+    {
+      '/highlight.min.js': langBundle,
     },
-  });
+    HLJS_CACHE,
+  );
 
   await pipeline(zip, res);
 };

@@ -1,11 +1,18 @@
+import fs from 'fs';
 import JSZip from 'jszip';
 
 export interface ZipFileStructure {
   [key: string]: string | ZipFileStructure;
 }
 
-export function makeZip(contents: ZipFileStructure) {
-  const zip = new JSZip();
+export async function makeZip(contents: ZipFileStructure, baseZipFile = null) {
+  let zip;
+
+  if (baseZipFile === null) {
+    zip = new JSZip();
+  } else {
+    zip = await JSZip.loadAsync(fs.readFileSync(baseZipFile));
+  }
 
   recurseZip(contents, zip);
 
