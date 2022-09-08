@@ -102,13 +102,13 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
           <div className="col-lg-6 order-2 order-lg-1">
             <ul className={styles.sellingPoints}>
               <li>
-                {LANG_COUNT} languages and {THEME_COUNT} styles
+                {LANG_COUNT} languages and {THEME_COUNT} themes
               </li>
               <li>Automatic language detection</li>
-              <li>Multi-language code highlighting</li>
-              <li>Available for Node.js</li>
-              <li>Works with any markup</li>
-              <li>Compatible with any js framework</li>
+              <li>Works with any HTML markup</li>
+              <li>Zero dependencies</li>
+              <li>Compatible with any JS framework</li>
+              <li>Supports Node.js and Deno</li>
             </ul>
             <p>
               <strong>Current release:</strong> {latestVersion}
