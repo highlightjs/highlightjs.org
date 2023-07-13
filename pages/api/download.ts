@@ -3,14 +3,10 @@ import path from 'path';
 import { pipeline } from 'stream/promises';
 
 import { NextApiRequest, NextApiResponse } from 'next';
-import getConfig from 'next/config';
 
 import { makeZip } from '../../utilities/zip';
 
-const { serverRuntimeConfig } = getConfig();
-const { PROJECT_ROOT } = serverRuntimeConfig;
-
-const HLJS_CACHE = path.resolve(PROJECT_ROOT + '/data/bundle-cache.zip');
+const HLJS_CACHE = path.resolve('./data/bundle-cache.zip');
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   let apiVersion: number | null;
@@ -98,7 +94,7 @@ function getLanguagesV2(request: NextApiRequest): string[] {
 }
 
 function getMinifiedBundle(languages: string[]): string {
-  const langSrcPath = path.join(PROJECT_ROOT, '/data/downloads/');
+  const langSrcPath = path.resolve('./data/downloads/');
   const hljsBasePath = path.join(langSrcPath, 'highlight.min.js');
   const languageSources: string[] = [fs.readFileSync(hljsBasePath, 'utf8')];
 

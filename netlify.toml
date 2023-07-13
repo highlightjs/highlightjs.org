@@ -1,0 +1,2 @@
+[functions.api_download]
+  included_files = ["data/downloads/*.js", "data/bundle-cache.zip"]
