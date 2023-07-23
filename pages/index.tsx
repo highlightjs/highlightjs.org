@@ -134,9 +134,6 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
           <li>
             <img src="./discord.png" alt="Discord" />
           </li>
-          <li>
-            <img src="./vscode.png" alt="Visual Studio Code" />
-          </li>
         </ul>
       </LightBackground>
 
