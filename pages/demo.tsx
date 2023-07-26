@@ -6,7 +6,6 @@ import { DumbEditor } from '../components/dumb-editor';
 import { LanguageSelector } from '../components/language-selector';
 import { ThemeSelector } from '../components/theme-selector';
 import { MainLayout } from '../layouts/main';
-import styles from '../styles/Demo.module.scss';
 
 interface Data {
   v: number;
@@ -66,9 +65,9 @@ const Demo = () => {
   return (
     <MainLayout>
       <div className="container">
-        <div className="row">
-          <div className={`col-lg-6 mb-3 mb-lg-0 ${styles.editorSection}`}>
-            <div className={styles.stickyWrapper}>
+        <div className="grid grid-cols-6 gap-8">
+          <div className="col-span-6 md:col-span-3 xl:col-span-2 mb-2 lg:mb-0 relative">
+            <div className="sticky top-4">
               <div className="d-md-flex mb-3">
                 <div className="flex-md-grow-1 mb-3 mb-md-0 pr-md-3">
                   <LanguageSelector
@@ -87,7 +86,7 @@ const Demo = () => {
 
                 <div className="ml-auto mt-auto">
                   <button
-                    className={['button', styles.shareButton].join(' ')}
+                    className="button"
                     onClick={handleShare}
                   >
                     Share
@@ -96,15 +95,15 @@ const Demo = () => {
               </div>
 
               <DumbEditor
-                className={styles.tabStyle}
+                className="tab-size"
                 onChange={setCode}
                 value={code}
               />
             </div>
           </div>
-          <div className="col-lg-6">
+          <div className="col-span-6 md:col-span-3 xl:col-span-4 mb-12 min-h-[6rem]">
             <CodeBlock
-              className={[styles.codeEditor, styles.tabStyle].join(' ')}
+              className="tab-size h-full"
               code={code}
               language={lang}
               theme={theme}
