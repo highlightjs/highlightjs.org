@@ -1,5 +1,3 @@
-import styles from './github-avatar.module.scss';
-
 interface Props {
   size: number;
   username: string;
@@ -28,16 +26,16 @@ const GitHubAvatar = ({ username, size }: Props) => {
   );
 
   return (
-    <a href={`https://github.com/${username}`}>
+    <a className="flex items-center" href={`https://github.com/${username}`}>
       <img
         alt={username}
-        className={styles.avatarImage}
+        className="rounded-md mr-2"
         height={size}
         src={avatarUrl}
         srcSet={srcSets.join(', ')}
         width={size}
       />
-      <span className={styles.avatarName}>{username}</span>
+      <span className="text-cyan-300 font-bold">{username}</span>
     </a>
   );
 };

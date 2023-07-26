@@ -5,11 +5,27 @@
     @apply text-cyan-300 underline;
   }
 
+  h2 {
+    @apply font-bold mb-4 text-3xl;
+  }
+
   h3 {
     @apply mx-0 mb-4 mt-8 border-b border-solid border-white/50 pb-1 text-2xl font-bold;
   }
 
   p {
-    @apply mb-8;
+    @apply mb-4;
+  }
+
+  ol, ul {
+    @apply mb-8 pl-12;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  ul {
+    @apply list-disc;
   }
 }
