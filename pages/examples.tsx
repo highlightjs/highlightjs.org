@@ -61,7 +61,7 @@ const Examples = ({ snippets, totalCount }: Props) => {
     <MainLayout>
       <div className="container">
         <div className="row">
-          <div className="col-lg-3 position-relative">
+          <div className="col-lg-3 relative">
             <div className={styles.sidebar}>
               <h1>Examples</h1>
 

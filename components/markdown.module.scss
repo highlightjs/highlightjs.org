@@ -1,12 +1,15 @@
 .markdown {
+  @apply text-xl;
+
   a {
-    color: var(--color-cyan);
-    text-decoration: underline;
+    @apply text-cyan-300 underline;
   }
 
   h3 {
-    border-bottom: 1px solid rgba(#fff, 0.3);
-    margin: 2rem 0 1rem;
-    padding-bottom: 0.15rem;
+    @apply mx-0 mb-4 mt-8 border-b border-solid border-white/50 pb-1 text-2xl font-bold;
+  }
+
+  p {
+    @apply mb-8;
   }
 }

@@ -14,9 +14,7 @@ export const Footer = () => (
         <div className="col-md-6">
           <ul className={styles.extraLinks}>
             <li>
-              <Link href="/examples">
-                Code Samples
-              </Link>
+              <Link href="/examples">Code Samples</Link>
             </li>
           </ul>
         </div>

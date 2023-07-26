@@ -10,7 +10,6 @@ import { LightBackground } from '../components/lightbackground';
 import { Markdown } from '../components/markdown';
 import themes from '../data/themes.json';
 import { MainLayout } from '../layouts/main';
-import styles from '../styles/Home.module.scss';
 
 const SNIPPETS_DIR = path.resolve(process.cwd(), 'data', 'snippets');
 const THEME_COUNT = themes.length;
@@ -97,10 +96,10 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
 
   return (
     <MainLayout>
-      <div className="container">
-        <div className="row align-items-center">
-          <div className="col-lg-6 order-2 order-lg-1">
-            <ul className={styles.sellingPoints}>
+      <div className="container-lg">
+        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+          <div className="flex flex-col justify-center order-2 lg:order-1">
+            <ul className="mb-8 pl-4 text-2xl list-disc md:columns-2 lg:columns-1">
               <li>
                 {LANG_COUNT} languages and {THEME_COUNT} themes
               </li>
@@ -110,75 +109,73 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
               <li>Compatible with any JS framework</li>
               <li>Supports Node.js and Deno</li>
             </ul>
-            <p>
+            <p className="text-xl">
               <strong>Current release:</strong> {latestVersion}
             </p>
           </div>
-          <div className="col-sm-10 offset-sm-1 offset-lg-0 col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0">
+          <div className="mx-auto order-1 lg:order-2 w-full">
             <CodeBlock
               code={snippet}
               language={lang}
-              className={styles.sampleSnippet}
+              className="max-h-[400px]"
             />
           </div>
         </div>
       </div>
 
       <LightBackground>
-        <h2 className="mb-4 text-center">Trusted by</h2>
+        <div className="container-lg">
+          <h2 className="mb-10 font-bold text-2xl text-center">Trusted by</h2>
 
-        <ul className={styles.trustedBy}>
-          <li>
-            <img src="./stackoverflow.png" alt="Stackoverflow" />
-          </li>
-          <li>
-            <img src="./discord.png" alt="Discord" />
-          </li>
-        </ul>
+          <ul className="flex flex-col sm:flex-row align-items-center justify-center gap-8 mb-0 ml-0 text-center">
+            <li>
+              <img src="./stackoverflow.png" alt="Stackoverflow" />
+            </li>
+            <li>
+              <img src="./discord.png" alt="Discord" />
+            </li>
+          </ul>
+        </div>
       </LightBackground>
 
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-8 offset-lg-2">
-            <Markdown
-              body={`
-                ## Usage {.text-center #usage}
+      <div className="container-lg py-10 lg:px-40">
+        <Markdown
+          body={`
+            ## Usage {.font-bold .mb-6 .text-2xl .text-center #usage}
 
-                highlight.js can be used in different ways such using CDNs, hosting the bundle yourself, as a Vue
-                plug-in, as ES6 modules, with Node.js, and web workers.
+            highlight.js can be used in different ways such using CDNs, hosting the bundle yourself, as a Vue
+            plug-in, as ES6 modules, with Node.js, and web workers.
 
-                See [our README on GitHub](https://github.com/highlightjs/highlight.js#getting-started) for more details.
+            See [our README on GitHub](https://github.com/highlightjs/highlight.js#getting-started) for more details.
 
-                ### As a Module {#as-a-module}
+            ### As a Module {#as-a-module}
 
-                Highlight.js can be used on the server. The package with all supported languages can be installed from
-                NPM or Yarn:
+            Highlight.js can be used on the server. The package with all supported languages can be installed from
+            NPM or Yarn:
 
-                ~~~bash
-                npm install highlight.js
-                # or
-                yarn add highlight.js
-                ~~~
+            ~~~bash
+            npm install highlight.js
+            # or
+            yarn add highlight.js
+            ~~~
 
-                ### As HTML Tags {#as-html-tags}
-              `}
-            />
+            ### As HTML Tags {#as-html-tags}
+          `}
+        />
 
-            <HTMLTagsExample className="my-4" version={latestVersion} />
+        <HTMLTagsExample className="my-4" version={latestVersion} />
 
-            <Markdown
-              body={`
-                This will find and highlight code inside of \`<pre><code>\` tags; it tries to detect the language
-                automatically. If automatic detection doesn’t work for you, you can specify the language in the class
-                attribute:
+        <Markdown
+          body={`
+            This will find and highlight code inside \`<pre><code>\` tags; it tries to detect the language
+            automatically. If automatic detection does not work for you, you can specify the language in the class
+            attribute:
 
-                ~~~html
-                <pre><code class="html">...</code></pre>
-                ~~~
-              `}
-            />
-          </div>
-        </div>
+            ~~~html
+            <pre><code class="html">...</code></pre>
+            ~~~
+          `}
+        />
       </div>
     </MainLayout>
   );

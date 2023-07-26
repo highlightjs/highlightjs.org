@@ -12,28 +12,22 @@ export const HTMLTagsExample = ({ className, version, ...props }: Props) => {
   const [cdn, setCDN] = useState('cdnjs');
   const links = {
     cdnjs: {
-      link:
-        'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/styles/default.min.css',
+      link: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/styles/default.min.css',
       script:
         'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/highlight.min.js',
-      lang:
-        'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/languages/go.min.js',
+      lang: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/languages/go.min.js',
     },
     jsDeliver: {
-      link:
-        'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/styles/default.min.css',
+      link: 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/styles/default.min.css',
       script:
         'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/highlight.min.js',
-      lang:
-        'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/languages/go.min.js',
+      lang: 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/languages/go.min.js',
     },
     unpkg: {
-      link:
-        'https://unpkg.com/@highlightjs/cdn-assets@{version}/styles/default.min.css',
+      link: 'https://unpkg.com/@highlightjs/cdn-assets@{version}/styles/default.min.css',
       script:
         'https://unpkg.com/@highlightjs/cdn-assets@{version}/highlight.min.js',
-      lang:
-        'https://unpkg.com/@highlightjs/cdn-assets@{version}/languages/go.min.js',
+      lang: 'https://unpkg.com/@highlightjs/cdn-assets@{version}/languages/go.min.js',
     },
     'Self hosted': {
       link: '/path/to/styles/default.css',

@@ -60,7 +60,7 @@ const LanguageList = () => {
     <div className="d-flex flex-column flex-md-row mt-3">
       <p
         id="language-list"
-        className="font-weight-bold mb-2 mb-md-0 mr-2 ws-nowrap"
+        className="font-weight-bold mb-2 mb-md-0 mr-2 whitespace-nowrap"
       >
         Selected Languages:
       </p>
@@ -144,9 +144,8 @@ const LanguageCheckbox = ({
   language,
   onFilterResults,
 }: LanguageCheckboxProps) => {
-  const { addLanguage, delLanguage, filter, selectedLanguages } = useContext(
-    PageContext,
-  );
+  const { addLanguage, delLanguage, filter, selectedLanguages } =
+    useContext(PageContext);
   const isFilterActive = !!filter;
 
   const [matchFound, setMatchFound] = useState(false);
@@ -283,10 +282,10 @@ const Download = () => {
             setFilter,
           }}
         >
-          <div className="container position-relative">
-            <h1 className="lh-1">Download a Custom Build</h1>
+          <div className="container relative">
+            <h1 className="leading-tight">Download a Custom Build</h1>
 
-            <form className="position-relative" onSubmit={handleOnSubmit}>
+            <form className="relative" onSubmit={handleOnSubmit}>
               <StickyElement
                 id="bundle-header"
                 sentinels={{

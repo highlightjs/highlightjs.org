@@ -72,14 +72,14 @@ const Demo = () => {
               <div className="d-md-flex mb-3">
                 <div className="flex-md-grow-1 mb-3 mb-md-0 pr-md-3">
                   <LanguageSelector
-                    className="w-100"
+                    className="relative"
                     onChange={setLang}
                     value={lang}
                   />
                 </div>
                 <div className="flex-md-grow-1 mb-3 mb-md-0 pr-md-3">
                   <ThemeSelector
-                    className="w-100"
+                    className="w-full"
                     onChange={setTheme}
                     value={theme}
                   />
