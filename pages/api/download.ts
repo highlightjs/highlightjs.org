@@ -4,7 +4,7 @@ import { pipeline } from 'stream/promises';
 
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { makeZip } from '../../utilities/zip';
+import { makeZip, ZipFileStructure } from '../../utilities/zip';
 
 const HLJS_CACHE = path.resolve('./data/bundle-cache.zip');
 
@@ -51,13 +51,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.setHeader('Content-Type', 'application/zip');
   res.setHeader('Content-Disposition', 'attachment; filename=highlight.zip');
 
-  const langBundle = getMinifiedBundle(languages);
-  const zip = await makeZip(
-    {
-      '/highlight.min.js': langBundle,
-    },
-    HLJS_CACHE,
-  );
+  const zip = await makeZip(getMinifiedBundle(languages), HLJS_CACHE);
 
   await pipeline(zip, res);
 };
@@ -93,7 +87,11 @@ function getLanguagesV2(request: NextApiRequest): string[] {
   return request.body['languages'];
 }
 
-function getMinifiedBundle(languages: string[]): string {
+function getMinifiedBundle(languages: string[]): ZipFileStructure {
+  const zipFileStructure: ZipFileStructure = {
+    '/languages': {},
+  };
+
   const langSrcPath = path.resolve('./data/downloads/');
   const hljsBasePath = path.join(langSrcPath, 'highlight.min.js');
   const languageSources: string[] = [fs.readFileSync(hljsBasePath, 'utf8')];
@@ -110,7 +108,10 @@ function getMinifiedBundle(languages: string[]): string {
     }
 
     languageSources.push(src);
+    zipFileStructure['/languages'][lang + '.min.js'] = src;
   });
 
-  return languageSources.join('');
+  zipFileStructure['/highlight.min.js'] = languageSources.join('');
+
+  return zipFileStructure;
 }
