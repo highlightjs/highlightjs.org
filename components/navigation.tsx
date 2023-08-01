@@ -12,7 +12,7 @@ const links = [
 ];
 
 export const Navigation = () => (
-  <header className="md:container py-12">
+  <header className="container py-12">
     <Head>
       <title>highlight.js</title>
       <link rel="icon" href="/favicon.ico" />

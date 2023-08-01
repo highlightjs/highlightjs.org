@@ -96,10 +96,10 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
 
   return (
     <MainLayout>
-      <div className="lg:container">
+      <div className="container">
         <div className="grid lg:grid-cols-2 gap-8 mb-12">
           <div className="flex flex-col justify-center order-2 lg:order-1">
-            <ul className="mb-8 pl-4 text-2xl list-disc md:columns-2 lg:columns-1">
+            <ul className="mb-8 pl-8 lg:pl-6 text-lg md:text-xl lg:text-2xl list-disc md:columns-2 lg:columns-1">
               <li>
                 {LANG_COUNT} languages and {THEME_COUNT} themes
               </li>
@@ -109,36 +109,38 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
               <li>Compatible with any JS framework</li>
               <li>Supports Node.js and Deno</li>
             </ul>
-            <p className="text-xl">
+            <p className="text-lg lg:text-xl">
               <strong>Current release:</strong> {latestVersion}
             </p>
           </div>
-          <div className="mx-auto order-1 lg:order-2 w-full">
-            <CodeBlock
-              code={snippet}
-              language={lang}
-              className="max-h-[400px]"
-            />
-          </div>
+          <CodeBlock
+            code={snippet}
+            language={lang}
+            className="max-h-[400px] order-1 lg:order-2"
+          />
         </div>
       </div>
 
       <LightBackground>
-        <div className="lg:container">
-          <h2 className="mb-10 font-bold text-2xl text-center">Trusted by</h2>
+        <h2 className="mb-6 md:mb-10 font-bold text-2xl text-center">
+          Trusted by
+        </h2>
 
-          <ul className="flex flex-col sm:flex-row align-items-center justify-center gap-8 mb-0 ml-0 text-center">
-            <li>
-              <img src="./stackoverflow.png" alt="Stackoverflow" />
-            </li>
-            <li>
-              <img src="./discord.png" alt="Discord" />
-            </li>
-          </ul>
-        </div>
+        <ul className="flex flex-col sm:flex-row align-items-center justify-center gap-8 mb-0 ml-0 text-center">
+          <li>
+            <img
+              src="./stackoverflow.png"
+              alt="Stack Overflow"
+              className="mx-auto"
+            />
+          </li>
+          <li>
+            <img src="./discord.png" alt="Discord" className="mx-auto" />
+          </li>
+        </ul>
       </LightBackground>
 
-      <div className="lg:container py-10 lg:px-40">
+      <div className="container py-10 lg:px-40">
         <Markdown
           body={`
             ## Usage {.font-bold .mb-6 .text-2xl .text-center #usage}

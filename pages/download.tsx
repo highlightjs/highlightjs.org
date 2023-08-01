@@ -12,6 +12,7 @@ import {
   useState,
 } from 'react';
 
+import { BlurredBackground } from '../components/blurredbackground';
 import SearchableText from '../components/searchable-text';
 import { MainLayout } from '../layouts/main';
 import { LANG_CATS } from '../utilities/constants';
@@ -166,6 +167,7 @@ const LanguageCheckbox = ({
   return (
     <label
       className={classList([
+        'font-normal',
         'truncate',
         ['hidden', isFilterActive && !matchFound],
       ])}
@@ -216,22 +218,26 @@ const LanguageCategory = ({ category }: LanguageCategoryProps) => {
   }, [langMatches]);
 
   return (
-    <fieldset
-      key={category}
-      className={classList(['mb-5', ['hidden', isFilterActive && !hasMatches]])}
-    >
-      <legend className="border-b pb-1 mb-3">{category}</legend>
+    <BlurredBackground className="mb-5 p-6">
+      <fieldset
+        key={category}
+        className={classList([['hidden', isFilterActive && !hasMatches]])}
+      >
+        <legend className="border-b pb-2 mb-6 w-full text-xl font-bold">
+          {category}
+        </legend>
 
-      <div className="grid grid-cols-2 md:grid-cols-4">
-        {LANG_CATS[category].map((language) => (
-          <LanguageCheckbox
-            key={language}
-            language={language}
-            onFilterResults={handleFilterResults}
-          />
-        ))}
-      </div>
-    </fieldset>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+          {LANG_CATS[category].map((language) => (
+            <LanguageCheckbox
+              key={language}
+              language={language}
+              onFilterResults={handleFilterResults}
+            />
+          ))}
+        </div>
+      </fieldset>
+    </BlurredBackground>
   );
 };
 
@@ -285,7 +291,7 @@ const Download = () => {
             setFilter,
           }}
         >
-          <div className="lg:container relative">
+          <div className="container relative">
             <h1 className="text-3xl leading-tight">Download a Custom Build</h1>
 
             <form className="relative" onSubmit={handleOnSubmit}>

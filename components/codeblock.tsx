@@ -35,7 +35,7 @@ export const CodeBlock = ({
 
   return (
     <pre
-      className={`theme-${hljsTheme} shadow-3xl text-sm relative ${className}`}
+      className={`theme-${hljsTheme} shadow-3xl text-sm relative overflow-hidden max-w-full ${className}`}
     >
       <span className="hljs mb-0 p-4 block min-h-full overflow-auto">
         <code dangerouslySetInnerHTML={markup} />

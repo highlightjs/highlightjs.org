@@ -3,6 +3,7 @@ import * as path from 'path';
 
 import * as matter from 'gray-matter';
 
+import { BlurredBackground } from '../components/blurredbackground';
 import GitHubAvatar from '../components/gtihub-avatar';
 import { Markdown } from '../components/markdown';
 import Timestamp from '../components/timestamp';
@@ -69,15 +70,12 @@ export async function getStaticProps() {
 
 const News = ({ articles }: Props) => (
   <MainLayout>
-    <div className="lg:container">
+    <div className="container">
       <h1 className="text-4xl mb-8">Project News</h1>
 
       <section>
         {articles.map((release) => (
-          <article
-            className="bg-white/5 rounded-2xl p-6 mb-8"
-            key={release.title}
-          >
+          <BlurredBackground className="p-6 mb-8" key={release.title}>
             <header className="border-b border-solid border-white/3 mb-3 pb-2">
               <h2 className="text-3xl mb-0">
                 {release.url ? (
@@ -96,7 +94,7 @@ const News = ({ articles }: Props) => (
             </header>
 
             <Markdown body={release.markdown} />
-          </article>
+          </BlurredBackground>
         ))}
       </section>
     </div>
