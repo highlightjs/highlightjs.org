@@ -65,8 +65,8 @@ const Demo = () => {
   return (
     <MainLayout title="Demo">
       <div className="container">
-        <div className="grid grid-cols-6 gap-8">
-          <div className="col-span-6 md:col-span-3 xl:col-span-2 mb-2 lg:mb-0 relative">
+        <div className="grid grid-cols-6 gap-8 mb-8">
+          <div className="col-span-6 md:col-span-3 xl:col-span-2 relative">
             <div className="sticky top-4">
               <div className="d-md-flex mb-3">
                 <div className="flex-md-grow-1 mb-3 mb-md-0 pr-md-3">
@@ -98,7 +98,7 @@ const Demo = () => {
               />
             </div>
           </div>
-          <div className="col-span-6 md:col-span-3 xl:col-span-4 mb-12 min-h-[6rem]">
+          <div className="col-span-6 md:col-span-3 xl:col-span-4 min-h-[6rem]">
             <CodeBlock
               className="tab-size h-full"
               code={code}
