@@ -12,9 +12,9 @@ import {
   useState,
 } from 'react';
 
+import { BlurredBackground } from '../components/blurredbackground';
 import SearchableText from '../components/searchable-text';
 import { MainLayout } from '../layouts/main';
-import styles from '../styles/Download.module.scss';
 import { LANG_CATS } from '../utilities/constants';
 import { classList } from '../utilities/cssClasses';
 import { removeFirst } from '../utilities/utilities';
@@ -57,10 +57,10 @@ const LanguageList = () => {
   const { delLanguage, selectedLanguages } = useContext(PageContext);
 
   return (
-    <div className="d-flex flex-column flex-md-row mt-3">
+    <div className="flex flex-col md:flex-row mt-3">
       <p
         id="language-list"
-        className="font-weight-bold mb-2 mb-md-0 mr-2 ws-nowrap"
+        className="font-weight-bold mb-2 mb-md-0 mr-2 whitespace-nowrap"
       >
         Selected Languages:
       </p>
@@ -69,14 +69,19 @@ const LanguageList = () => {
           <em>None Selected</em>
         </span>
       ) : (
-        <ul
-          className={styles.selectedLanguages}
-          aria-describedby="language-list"
-        >
+        <ul className="mb-0 pl-0 list-none" aria-describedby="language-list">
           {selectedLanguages.map((language) => (
-            <li key={language} className={styles.selectedLanguage}>
+            <li
+              key={language}
+              className="bg-cyan-300 rounded text-cyan-900 inline-block text-sm mb-1 mr-2 pt-0 px-2 pb-0.5"
+            >
               {language}
-              <button onClick={() => delLanguage(language)}>&times;</button>
+              <button
+                className="text-cyan-900 ml-2"
+                onClick={() => delLanguage(language)}
+              >
+                &times;
+              </button>
             </li>
           ))}
         </ul>
@@ -106,12 +111,12 @@ const BundlerControls = () => {
   return (
     <>
       <div
-        className={styles.bundleHeaderBackground}
+        className="hidden shadow-3xl fixed left-0 top-0 w-full bg-brand-grey transition-colors duration-200 motion-reduce:transition-none stuck:show"
         style={{ height: `${height}px` }}
       />
-      <div className={styles.bundleHeaderBody} ref={containerRef}>
-        <div className="d-flex">
-          <div className="flex-grow-1">
+      <div className="relative py-4" ref={containerRef}>
+        <div className="flex">
+          <div className="flex-1">
             <label htmlFor="language-filter" className="sr-only">
               Search Languages
             </label>
@@ -123,7 +128,7 @@ const BundlerControls = () => {
               value={filter}
             />
           </div>
-          <div className="pl-3">
+          <div className="pl-4">
             <button type="submit" className="button">
               Download
             </button>
@@ -144,9 +149,8 @@ const LanguageCheckbox = ({
   language,
   onFilterResults,
 }: LanguageCheckboxProps) => {
-  const { addLanguage, delLanguage, filter, selectedLanguages } = useContext(
-    PageContext,
-  );
+  const { addLanguage, delLanguage, filter, selectedLanguages } =
+    useContext(PageContext);
   const isFilterActive = !!filter;
 
   const [matchFound, setMatchFound] = useState(false);
@@ -163,9 +167,9 @@ const LanguageCheckbox = ({
   return (
     <label
       className={classList([
-        'col-6',
-        'col-md-3',
-        ['d-none', isFilterActive && !matchFound],
+        'font-normal',
+        'truncate',
+        ['hidden', isFilterActive && !matchFound],
       ])}
       key={language}
     >
@@ -214,22 +218,29 @@ const LanguageCategory = ({ category }: LanguageCategoryProps) => {
   }, [langMatches]);
 
   return (
-    <fieldset
-      key={category}
-      className={isFilterActive && !hasMatches ? 'd-none' : ''}
+    <BlurredBackground
+      className={classList([
+        'mb-5',
+        'p-6',
+        ['hidden', isFilterActive && !hasMatches],
+      ])}
     >
-      <legend>{category}</legend>
+      <fieldset key={category}>
+        <legend className="border-b pb-2 mb-6 w-full text-xl font-bold">
+          {category}
+        </legend>
 
-      <div className="row">
-        {LANG_CATS[category].map((language) => (
-          <LanguageCheckbox
-            key={language}
-            language={language}
-            onFilterResults={handleFilterResults}
-          />
-        ))}
-      </div>
-    </fieldset>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+          {LANG_CATS[category].map((language) => (
+            <LanguageCheckbox
+              key={language}
+              language={language}
+              onFilterResults={handleFilterResults}
+            />
+          ))}
+        </div>
+      </fieldset>
+    </BlurredBackground>
   );
 };
 
@@ -272,7 +283,7 @@ const Download = () => {
   };
 
   return (
-    <MainLayout>
+    <MainLayout title="Download a Custom Build">
       <StickyViewport useBrowserViewport={true}>
         <PageContext.Provider
           value={{
@@ -283,10 +294,8 @@ const Download = () => {
             setFilter,
           }}
         >
-          <div className="container position-relative">
-            <h1 className="lh-1">Download a Custom Build</h1>
-
-            <form className="position-relative" onSubmit={handleOnSubmit}>
+          <div className="container relative">
+            <form className="relative" onSubmit={handleOnSubmit}>
               <StickyElement
                 id="bundle-header"
                 sentinels={{
@@ -294,12 +303,12 @@ const Download = () => {
                   bottom: { height: '50px' },
                 }}
               >
-                <section className={styles.bundleHeader}>
+                <section className="sticky top-0 z-10">
                   <BundlerControls />
                 </section>
               </StickyElement>
 
-              <section className={styles.languagesContainer}>
+              <section>
                 {Object.keys(LANG_CATS).map((category) => (
                   <LanguageCategory key={category} category={category} />
                 ))}

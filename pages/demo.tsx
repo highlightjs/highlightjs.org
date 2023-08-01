@@ -6,7 +6,6 @@ import { DumbEditor } from '../components/dumb-editor';
 import { LanguageSelector } from '../components/language-selector';
 import { ThemeSelector } from '../components/theme-selector';
 import { MainLayout } from '../layouts/main';
-import styles from '../styles/Demo.module.scss';
 
 interface Data {
   v: number;
@@ -64,47 +63,44 @@ const Demo = () => {
   }, []);
 
   return (
-    <MainLayout>
+    <MainLayout title="Demo">
       <div className="container">
-        <div className="row">
-          <div className={`col-lg-6 mb-3 mb-lg-0 ${styles.editorSection}`}>
-            <div className={styles.stickyWrapper}>
+        <div className="grid grid-cols-6 gap-8 mb-8">
+          <div className="col-span-6 md:col-span-3 xl:col-span-2 relative">
+            <div className="sticky top-4">
               <div className="d-md-flex mb-3">
                 <div className="flex-md-grow-1 mb-3 mb-md-0 pr-md-3">
                   <LanguageSelector
-                    className="w-100"
+                    className="relative"
                     onChange={setLang}
                     value={lang}
                   />
                 </div>
                 <div className="flex-md-grow-1 mb-3 mb-md-0 pr-md-3">
                   <ThemeSelector
-                    className="w-100"
+                    className="w-full"
                     onChange={setTheme}
                     value={theme}
                   />
                 </div>
 
                 <div className="ml-auto mt-auto">
-                  <button
-                    className={['button', styles.shareButton].join(' ')}
-                    onClick={handleShare}
-                  >
+                  <button className="button" onClick={handleShare}>
                     Share
                   </button>
                 </div>
               </div>
 
               <DumbEditor
-                className={styles.tabStyle}
+                className="tab-size"
                 onChange={setCode}
                 value={code}
               />
             </div>
           </div>
-          <div className="col-lg-6">
+          <div className="col-span-6 md:col-span-3 xl:col-span-4 min-h-[6rem]">
             <CodeBlock
-              className={[styles.codeEditor, styles.tabStyle].join(' ')}
+              className="tab-size h-full"
               code={code}
               language={lang}
               theme={theme}

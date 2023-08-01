@@ -1,7 +1,7 @@
 import dedent from 'dedent';
 import { HTMLAttributes, useState } from 'react';
 
-import styles from './cdn-block.module.scss';
+import { classList } from '../utilities/cssClasses';
 import { CodeBlock } from './codeblock';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -12,28 +12,22 @@ export const HTMLTagsExample = ({ className, version, ...props }: Props) => {
   const [cdn, setCDN] = useState('cdnjs');
   const links = {
     cdnjs: {
-      link:
-        'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/styles/default.min.css',
+      link: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/styles/default.min.css',
       script:
         'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/highlight.min.js',
-      lang:
-        'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/languages/go.min.js',
+      lang: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{version}/languages/go.min.js',
     },
     jsDeliver: {
-      link:
-        'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/styles/default.min.css',
+      link: 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/styles/default.min.css',
       script:
         'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/highlight.min.js',
-      lang:
-        'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/languages/go.min.js',
+      lang: 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/languages/go.min.js',
     },
     unpkg: {
-      link:
-        'https://unpkg.com/@highlightjs/cdn-assets@{version}/styles/default.min.css',
+      link: 'https://unpkg.com/@highlightjs/cdn-assets@{version}/styles/default.min.css',
       script:
         'https://unpkg.com/@highlightjs/cdn-assets@{version}/highlight.min.js',
-      lang:
-        'https://unpkg.com/@highlightjs/cdn-assets@{version}/languages/go.min.js',
+      lang: 'https://unpkg.com/@highlightjs/cdn-assets@{version}/languages/go.min.js',
     },
     'Self hosted': {
       link: '/path/to/styles/default.css',
@@ -62,14 +56,21 @@ export const HTMLTagsExample = ({ className, version, ...props }: Props) => {
     .replace(/{version}/g, version)
     .trim();
   return (
-    <div className={[styles.wrapper, className].join(' ')} {...props}>
-      <div className={styles.tabs}>
+    <div className={classList(['relative', className])} {...props}>
+      <div className="overflow-auto relative whitespace-nowrap z-20">
         {Object.keys(links).map((name, index) => (
           <button
             key={index}
-            className={[styles.tab, cdn !== name ? styles.active : ''].join(
-              ' ',
-            )}
+            className={classList([
+              'border-0',
+              'rounded-t-xl',
+              'text-white',
+              'mr-1',
+              'px-4',
+              'py-2',
+              ['bg-neutral-800', cdn !== name],
+              ['bg-neutral-600', cdn === name],
+            ])}
             onClick={() => setCDN(name)}
           >
             {name}

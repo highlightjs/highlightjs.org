@@ -3,11 +3,11 @@ import * as path from 'path';
 
 import * as matter from 'gray-matter';
 
+import { BlurredBackground } from '../components/blurredbackground';
 import GitHubAvatar from '../components/gtihub-avatar';
 import { Markdown } from '../components/markdown';
 import Timestamp from '../components/timestamp';
 import { MainLayout } from '../layouts/main';
-import styles from '../styles/News.module.scss';
 
 const NEWS_DIR = path.resolve(process.cwd(), 'news');
 const GH_API =
@@ -69,22 +69,22 @@ export async function getStaticProps() {
 }
 
 const News = ({ articles }: Props) => (
-  <MainLayout>
+  <MainLayout title="Project News">
     <div className="container">
-      <h1>Project News</h1>
-
       <section>
         {articles.map((release) => (
-          <article className={styles.newsArticle} key={release.title}>
-            <header className={styles.newsHeader}>
-              <h2 className="mb-0">
+          <BlurredBackground className="p-6 mb-8" key={release.title}>
+            <header className="border-b border-solid border-white/3 mb-3 pb-2">
+              <h2 className="text-3xl mb-0">
                 {release.url ? (
-                  <a href={release.url}>{release.title}</a>
+                  <a href={release.url} className="text-cyan-300">
+                    {release.title}
+                  </a>
                 ) : (
                   <span>{release.title}</span>
                 )}
               </h2>
-              <div>
+              <div className="flex items-center">
                 <Timestamp timestamp={release.date} />
                 <span className="mx-2">&middot;</span>
                 <GitHubAvatar username={release.author} size={24} />
@@ -92,7 +92,7 @@ const News = ({ articles }: Props) => (
             </header>
 
             <Markdown body={release.markdown} />
-          </article>
+          </BlurredBackground>
         ))}
       </section>
     </div>

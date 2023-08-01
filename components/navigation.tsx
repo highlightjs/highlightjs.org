@@ -1,8 +1,5 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
-
-import styles from './navigation.module.scss';
 
 const links = [
   <Link href="/#usage">Usage</Link>,
@@ -14,22 +11,27 @@ const links = [
 ];
 
 export const Navigation = () => (
-  <header className="container py-5">
-    <Head>
-      <title>highlight.js</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
-
-    <nav className="row">
-      <div className={`col-md-4 ${styles.titleContainer}`}>
-        <span className={styles.wordMark}>
-          <Link href="/">highlight.js</Link>
+  <header className="container py-12">
+    <nav className="md:grid grid-cols-3">
+      <div className="col-span-1 text-center sm:text-left mb-4 md:mb-0">
+        <span className="text-4xl font-bold">
+          <Link
+            className="no-underline hover:text-cyan-300 focus:text-cyan-300"
+            href="/"
+          >
+            highlight.js
+          </Link>
         </span>
       </div>
-      <div className={`col-md-8 ${styles.navContainer}`}>
-        <ul className={styles.navigation}>
+      <div className="col-span-2 flex">
+        <ul className="m-auto pl-0 text-center sm:mr-0 sm:text-right">
           {links.map((link, i) => (
-            <li key={i}>{link}</li>
+            <li
+              key={i}
+              className="inline-block text-xl font-bold ml-4 first:ml-0"
+            >
+              {link}
+            </li>
           ))}
         </ul>
       </div>

@@ -2,7 +2,6 @@ import hljs, { HighlightResult } from 'highlight.js';
 import React from 'react';
 
 import themes from '../data/themes.json';
-import styles from './codeblock.module.scss';
 
 interface Props {
   className?: string;
@@ -36,12 +35,12 @@ export const CodeBlock = ({
 
   return (
     <pre
-      className={[`theme-${hljsTheme}`, styles.codeBlock, className].join(' ')}
+      className={`theme-${hljsTheme} shadow-3xl text-sm relative overflow-hidden max-w-full ${className}`}
     >
-      <span className={`hljs mb-0 p-4 ${styles.hljsBlock}`}>
+      <span className="hljs mb-0 p-4 block min-h-full overflow-auto">
         <code dangerouslySetInnerHTML={markup} />
       </span>
-      <small className={styles.tagLang}>
+      <small className="bg-black/30 absolute top-0 right-0 uppercase font-bold text-xs rounded-bl-md px-2 py-1">
         <span className="sr-only">Language:</span>
         {name?.name || language || 'text'}
       </small>
