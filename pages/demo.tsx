@@ -63,7 +63,7 @@ const Demo = () => {
   }, []);
 
   return (
-    <MainLayout>
+    <MainLayout title="Demo">
       <div className="container">
         <div className="grid grid-cols-6 gap-8">
           <div className="col-span-6 md:col-span-3 xl:col-span-2 mb-2 lg:mb-0 relative">

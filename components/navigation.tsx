@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 
@@ -13,13 +12,8 @@ const links = [
 
 export const Navigation = () => (
   <header className="container py-12">
-    <Head>
-      <title>highlight.js</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
-
     <nav className="md:grid grid-cols-3">
-      <div className="col-span-1 text-center sm:text-left">
+      <div className="col-span-1 text-center sm:text-left mb-4 md:mb-0">
         <span className="text-4xl font-bold">
           <Link
             className="no-underline hover:text-cyan-300 focus:text-cyan-300"

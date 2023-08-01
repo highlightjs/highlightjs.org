@@ -58,13 +58,11 @@ const Examples = ({ snippets, totalCount }: Props) => {
   };
 
   return (
-    <MainLayout>
+    <MainLayout title="Examples">
       <div className="container">
         <div className="md:grid grid-cols-4 gap-8">
           <div className="col-span-1 relative">
             <div className="sticky top-4">
-              <h1 className="mb-3 text-3xl">Examples</h1>
-
               <div>
                 <label htmlFor="language-category">Language Category</label>
                 <select

@@ -69,10 +69,8 @@ export async function getStaticProps() {
 }
 
 const News = ({ articles }: Props) => (
-  <MainLayout>
+  <MainLayout title="Project News">
     <div className="container">
-      <h1 className="text-4xl mb-8">Project News</h1>
-
       <section>
         {articles.map((release) => (
           <BlurredBackground className="p-6 mb-8" key={release.title}>

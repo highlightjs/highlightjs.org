@@ -57,7 +57,7 @@ const LanguageList = () => {
   const { delLanguage, selectedLanguages } = useContext(PageContext);
 
   return (
-    <div className="d-flex flex-column flex-md-row mt-3">
+    <div className="flex flex-col md:flex-row mt-3">
       <p
         id="language-list"
         className="font-weight-bold mb-2 mb-md-0 mr-2 whitespace-nowrap"
@@ -218,11 +218,14 @@ const LanguageCategory = ({ category }: LanguageCategoryProps) => {
   }, [langMatches]);
 
   return (
-    <BlurredBackground className="mb-5 p-6">
-      <fieldset
-        key={category}
-        className={classList([['hidden', isFilterActive && !hasMatches]])}
-      >
+    <BlurredBackground
+      className={classList([
+        'mb-5',
+        'p-6',
+        ['hidden', isFilterActive && !hasMatches],
+      ])}
+    >
+      <fieldset key={category}>
         <legend className="border-b pb-2 mb-6 w-full text-xl font-bold">
           {category}
         </legend>
@@ -280,7 +283,7 @@ const Download = () => {
   };
 
   return (
-    <MainLayout>
+    <MainLayout title="Download a Custom Build">
       <StickyViewport useBrowserViewport={true}>
         <PageContext.Provider
           value={{
@@ -292,8 +295,6 @@ const Download = () => {
           }}
         >
           <div className="container relative">
-            <h1 className="text-3xl leading-tight">Download a Custom Build</h1>
-
             <form className="relative" onSubmit={handleOnSubmit}>
               <StickyElement
                 id="bundle-header"
