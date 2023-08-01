@@ -7,6 +7,9 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true,
+    },
     extend: {
       boxShadow: {
         '3xl': '7px 7px 15px 0 #000',
@@ -14,6 +17,7 @@ module.exports = {
       colors: {
         'brand-grey': '#2f3130',
         'brand-red': '#512222',
+        'brand-red-alt': '#6c2c2d',
       }
     },
   },

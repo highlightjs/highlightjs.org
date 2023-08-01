@@ -285,7 +285,7 @@ const Download = () => {
             setFilter,
           }}
         >
-          <div className="container-lg relative">
+          <div className="lg:container relative">
             <h1 className="text-3xl leading-tight">Download a Custom Build</h1>
 
             <form className="relative" onSubmit={handleOnSubmit}>

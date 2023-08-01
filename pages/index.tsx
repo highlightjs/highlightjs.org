@@ -96,7 +96,7 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
 
   return (
     <MainLayout>
-      <div className="container-lg">
+      <div className="lg:container">
         <div className="grid lg:grid-cols-2 gap-8 mb-12">
           <div className="flex flex-col justify-center order-2 lg:order-1">
             <ul className="mb-8 pl-4 text-2xl list-disc md:columns-2 lg:columns-1">
@@ -124,7 +124,7 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
       </div>
 
       <LightBackground>
-        <div className="container-lg">
+        <div className="lg:container">
           <h2 className="mb-10 font-bold text-2xl text-center">Trusted by</h2>
 
           <ul className="flex flex-col sm:flex-row align-items-center justify-center gap-8 mb-0 ml-0 text-center">
@@ -138,7 +138,7 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
         </div>
       </LightBackground>
 
-      <div className="container-lg py-10 lg:px-40">
+      <div className="lg:container py-10 lg:px-40">
         <Markdown
           body={`
             ## Usage {.font-bold .mb-6 .text-2xl .text-center #usage}

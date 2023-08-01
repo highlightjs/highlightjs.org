@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@allejo/react-position-sticky": "^1.0.0-rc.1",
-    "bootstrap": "^4.5.2",
     "dedent": "^0.7.0",
     "file-saver": "^2.0.5",
     "gray-matter": "^4.0.2",

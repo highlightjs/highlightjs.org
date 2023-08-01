@@ -1,7 +1,7 @@
 import dedent from 'dedent';
 import { HTMLAttributes, useState } from 'react';
 
-import styles from './cdn-block.module.scss';
+import { classList } from '../utilities/cssClasses';
 import { CodeBlock } from './codeblock';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -56,14 +56,21 @@ export const HTMLTagsExample = ({ className, version, ...props }: Props) => {
     .replace(/{version}/g, version)
     .trim();
   return (
-    <div className={[styles.wrapper, className].join(' ')} {...props}>
-      <div className={styles.tabs}>
+    <div className={classList(['relative', className])} {...props}>
+      <div className="overflow-auto relative whitespace-nowrap z-20">
         {Object.keys(links).map((name, index) => (
           <button
             key={index}
-            className={[styles.tab, cdn !== name ? styles.active : ''].join(
-              ' ',
-            )}
+            className={classList([
+              'border-0',
+              'rounded-t-xl',
+              'text-white',
+              'mr-1',
+              'px-4',
+              'py-2',
+              ['bg-neutral-800', cdn !== name],
+              ['bg-neutral-600', cdn === name],
+            ])}
             onClick={() => setCDN(name)}
           >
             {name}

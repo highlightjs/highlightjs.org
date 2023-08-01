@@ -59,7 +59,7 @@ const Examples = ({ snippets, totalCount }: Props) => {
 
   return (
     <MainLayout>
-      <div className="container-lg">
+      <div className="lg:container">
         <div className="md:grid grid-cols-4 gap-8">
           <div className="col-span-1 relative">
             <div className="sticky top-4">

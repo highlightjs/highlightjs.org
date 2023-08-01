@@ -69,7 +69,7 @@ export async function getStaticProps() {
 
 const News = ({ articles }: Props) => (
   <MainLayout>
-    <div className="container-lg">
+    <div className="lg:container">
       <h1 className="text-4xl mb-8">Project News</h1>
 
       <section>
