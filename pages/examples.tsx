@@ -59,17 +59,17 @@ const Examples = ({ snippets, totalCount }: Props) => {
 
   return (
     <MainLayout>
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-3 relative">
-            <div className={styles.sidebar}>
-              <h1>Examples</h1>
+      <div className="container-lg">
+        <div className="md:grid grid-cols-4 gap-8">
+          <div className="col-span-1 relative">
+            <div className="sticky top-4">
+              <h1 className="mb-3 text-3xl">Examples</h1>
 
               <div>
                 <label htmlFor="language-category">Language Category</label>
                 <select
                   id="language-category"
-                  className={styles.languageCategories}
+                  className="mb-4"
                   value={filter}
                   onChange={handleRadio}
                 >
@@ -83,14 +83,14 @@ const Examples = ({ snippets, totalCount }: Props) => {
               </div>
 
               <ThemeSelector
-                className="mb-3"
+                className="mb-4"
                 onChange={setTheme}
                 value={theme}
               />
             </div>
           </div>
 
-          <div className="col-lg-9">
+          <div className="col-span-3">
             <section className={styles[`show-${filter}`]}>
               {Object.keys(snippets).map((language) => (
                 <div
@@ -98,7 +98,7 @@ const Examples = ({ snippets, totalCount }: Props) => {
                   data-category={__LANG_LOOKUP[language]?.toLowerCase()}
                 >
                   <CodeBlock
-                    className={styles.sampleSnippet}
+                    className="h-[400px] mb-6"
                     code={snippets[language]}
                     language={language}
                     theme={theme}

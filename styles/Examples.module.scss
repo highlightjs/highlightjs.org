@@ -1,27 +1,3 @@
-.sampleSnippet {
-  height: 400px;
-  margin-bottom: 1.5rem;
-}
-
-.sidebar {
-  position: sticky;
-  top: 1rem;
-}
-
-.languageCategories {
-  margin-bottom: 1rem;
-
-  legend {
-    font-size: 1rem;
-    font-weight: bold;
-  }
-
-  label {
-    display: inline-block;
-    margin-right: 1rem;
-  }
-}
-
 $categories: (
   'assembler',
   'common',
