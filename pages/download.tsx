@@ -14,7 +14,6 @@ import {
 
 import SearchableText from '../components/searchable-text';
 import { MainLayout } from '../layouts/main';
-import styles from '../styles/Download.module.scss';
 import { LANG_CATS } from '../utilities/constants';
 import { classList } from '../utilities/cssClasses';
 import { removeFirst } from '../utilities/utilities';
@@ -69,14 +68,19 @@ const LanguageList = () => {
           <em>None Selected</em>
         </span>
       ) : (
-        <ul
-          className={styles.selectedLanguages}
-          aria-describedby="language-list"
-        >
+        <ul className="mb-0 pl-0 list-none" aria-describedby="language-list">
           {selectedLanguages.map((language) => (
-            <li key={language} className={styles.selectedLanguage}>
+            <li
+              key={language}
+              className="bg-cyan-300 rounded text-cyan-900 inline-block text-sm mb-1 mr-2 pt-0 px-2 pb-0.5"
+            >
               {language}
-              <button onClick={() => delLanguage(language)}>&times;</button>
+              <button
+                className="text-cyan-900 ml-2"
+                onClick={() => delLanguage(language)}
+              >
+                &times;
+              </button>
             </li>
           ))}
         </ul>
@@ -106,12 +110,12 @@ const BundlerControls = () => {
   return (
     <>
       <div
-        className={styles.bundleHeaderBackground}
+        className="hidden shadow-3xl fixed left-0 top-0 w-full bg-brand-grey transition-colors duration-200 motion-reduce:transition-none stuck:show"
         style={{ height: `${height}px` }}
       />
-      <div className={styles.bundleHeaderBody} ref={containerRef}>
-        <div className="d-flex">
-          <div className="flex-grow-1">
+      <div className="relative py-4" ref={containerRef}>
+        <div className="flex">
+          <div className="flex-1">
             <label htmlFor="language-filter" className="sr-only">
               Search Languages
             </label>
@@ -123,7 +127,7 @@ const BundlerControls = () => {
               value={filter}
             />
           </div>
-          <div className="pl-3">
+          <div className="pl-4">
             <button type="submit" className="button">
               Download
             </button>
@@ -162,9 +166,8 @@ const LanguageCheckbox = ({
   return (
     <label
       className={classList([
-        'col-6',
-        'col-md-3',
-        ['d-none', isFilterActive && !matchFound],
+        'truncate',
+        ['hidden', isFilterActive && !matchFound],
       ])}
       key={language}
     >
@@ -215,11 +218,11 @@ const LanguageCategory = ({ category }: LanguageCategoryProps) => {
   return (
     <fieldset
       key={category}
-      className={isFilterActive && !hasMatches ? 'd-none' : ''}
+      className={classList(['mb-5', ['hidden', isFilterActive && !hasMatches]])}
     >
-      <legend>{category}</legend>
+      <legend className="border-b pb-1 mb-3">{category}</legend>
 
-      <div className="row">
+      <div className="grid grid-cols-2 md:grid-cols-4">
         {LANG_CATS[category].map((language) => (
           <LanguageCheckbox
             key={language}
@@ -282,8 +285,8 @@ const Download = () => {
             setFilter,
           }}
         >
-          <div className="container relative">
-            <h1 className="leading-tight">Download a Custom Build</h1>
+          <div className="container-lg relative">
+            <h1 className="text-3xl leading-tight">Download a Custom Build</h1>
 
             <form className="relative" onSubmit={handleOnSubmit}>
               <StickyElement
@@ -293,12 +296,12 @@ const Download = () => {
                   bottom: { height: '50px' },
                 }}
               >
-                <section className={styles.bundleHeader}>
+                <section className="sticky top-0 z-10">
                   <BundlerControls />
                 </section>
               </StickyElement>
 
-              <section className={styles.languagesContainer}>
+              <section>
                 {Object.keys(LANG_CATS).map((category) => (
                   <LanguageCategory key={category} category={category} />
                 ))}

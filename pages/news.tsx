@@ -74,11 +74,16 @@ const News = ({ articles }: Props) => (
 
       <section>
         {articles.map((release) => (
-          <article className="bg-white/5 rounded-2xl p-6 mb-8" key={release.title}>
+          <article
+            className="bg-white/5 rounded-2xl p-6 mb-8"
+            key={release.title}
+          >
             <header className="border-b border-solid border-white/3 mb-3 pb-2">
               <h2 className="text-3xl mb-0">
                 {release.url ? (
-                  <a href={release.url} className="text-cyan-300">{release.title}</a>
+                  <a href={release.url} className="text-cyan-300">
+                    {release.title}
+                  </a>
                 ) : (
                   <span>{release.title}</span>
                 )}

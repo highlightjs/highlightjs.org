@@ -6,7 +6,7 @@
   }
 
   h2 {
-    @apply font-bold mb-4 text-3xl;
+    @apply mb-4 text-3xl font-bold;
   }
 
   h3 {
@@ -17,7 +17,8 @@
     @apply mb-4;
   }
 
-  ol, ul {
+  ol,
+  ul {
     @apply mb-8 pl-12;
   }
 

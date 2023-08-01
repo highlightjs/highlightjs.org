@@ -85,10 +85,7 @@ const Demo = () => {
                 </div>
 
                 <div className="ml-auto mt-auto">
-                  <button
-                    className="button"
-                    onClick={handleShare}
-                  >
+                  <button className="button" onClick={handleShare}>
                     Share
                   </button>
                 </div>

@@ -91,3 +91,9 @@ select {
 .tab-size {
   tab-size: 4;
 }
+
+.sticky[data-stuck] {
+  .stuck\:show {
+    display: block;
+  }
+}
