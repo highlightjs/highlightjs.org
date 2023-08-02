@@ -1,7 +1,7 @@
 ---
 title: New Website
 author: allejo
-date: 2021-11-30
+date: 2023-08-02
 category: community
 ---
 
@@ -13,7 +13,7 @@ Whenever you're navigating the internet for libraries to use in your project, yo
 
 Say no more, introducing our new [demo](/demo) page where you can test code snippets and preview themes! But wait, there's more!
 
-You can share the code snippets you write on our demo page! We're not storing these code snippets in any databases. It's all store in the URL. So be mindful of sharing extremely large code snippets.
+You can share the code snippets you write on our demo page! We're not storing these code snippets in any databases. It's all stored in the URL. So be mindful of sharing extremely large code snippets.
 
 ## Download Page
 
