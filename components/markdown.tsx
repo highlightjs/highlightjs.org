@@ -13,7 +13,7 @@ interface Props {
 const md = MarkdownIt({
   highlight: (str, lang): string => {
     return ReactDOMServer.renderToStaticMarkup(
-      <CodeBlock code={str} language={lang} />,
+      <CodeBlock code={str} language={lang} className="mb-6" />,
     );
   },
 });

@@ -152,14 +152,54 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
 
             ### As a Module {#as-a-module}
 
-            Highlight.js can be used on the server. The package with all supported languages can be installed from
-            NPM or Yarn:
+            Highlight.js can be used with Node on the server. The first step is to install the package from
+            [npm](https://www.npmjs.com/package/highlight.js):
 
             ~~~bash
             npm install highlight.js
             # or
             yarn add highlight.js
             ~~~
+
+            Now, it's possible to use the library using either \`require\` or \`import\`. By default, when you import the
+            main package, all ${LANG_COUNT} languages will be loaded automatically.
+
+            ~~~js
+            // Using require
+            const hljs = require('highlight.js');
+
+            // Using ES6 import syntax
+            import hljs from 'highlight.js';
+            ~~~
+
+            However, importing all our languages will increase the size of your bundle. If you only need a few languages,
+            you can import them individually:
+
+            ~~~js
+            // Using require
+            const hljs = require('highlight.js/lib/core');
+
+            // Load any languages you need
+            hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
+            ~~~
+
+            ~~~js
+            // Using ES6 import syntax
+            import hljs from 'highlight.js/lib/core';
+            import javascript from 'highlight.js/lib/languages/javascript';
+
+            // Then register the languages you need
+            hljs.registerLanguage('javascript', javascript);
+            ~~~
+
+            And finally, regardless of how you imported the library, you can highlight code with the \`highlight\` or
+            \`highlightAuto\` functions:
+
+            ~~~js
+            const highlightedCode = hljs.highlight('<span>Hello World!</span>', { language: 'xml' }).value
+            ~~~
+
+            For more details, see [the "Importing the Library" section of our README](https://github.com/highlightjs/highlight.js#importing-the-library).
 
             ### As HTML Tags {#as-html-tags}
           `}
@@ -174,7 +214,7 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
             attribute:
 
             ~~~html
-            <pre><code class="html">...</code></pre>
+            <pre><code class="language-html">...</code></pre>
             ~~~
           `}
         />
