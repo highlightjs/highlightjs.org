@@ -16,7 +16,7 @@ export const MainLayout = ({ children, title }: Props) => (
         {title ? `${title} - ` : ''}
         highlight.js
       </title>
-      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" href="/icon.png" />
     </Head>
 
     <Navigation />
