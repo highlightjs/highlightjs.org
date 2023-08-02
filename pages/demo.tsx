@@ -63,7 +63,10 @@ const Demo = () => {
   }, []);
 
   return (
-    <MainLayout title="Demo">
+    <MainLayout
+      title="Demo"
+      description="Preview how highlight.js will highlight your code snippets and share them with other syntax highlighting nerds"
+    >
       <div className="container">
         <div className="grid grid-cols-6 gap-8 mb-8">
           <div className="col-span-6 md:col-span-3 xl:col-span-2 relative">

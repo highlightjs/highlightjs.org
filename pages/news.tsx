@@ -69,7 +69,10 @@ export async function getStaticProps() {
 }
 
 const News = ({ articles }: Props) => (
-  <MainLayout title="Project News">
+  <MainLayout
+    title="Project News"
+    description="Follow the latest news and releases for the highlight.js project and its community"
+  >
     <div className="container">
       <section>
         {articles.map((release) => (

@@ -58,7 +58,10 @@ const Examples = ({ snippets, totalCount }: Props) => {
   };
 
   return (
-    <MainLayout title="Examples">
+    <MainLayout
+      title="Examples"
+      description="With support for ~200 languages and themes, see how every language looks like in every theme"
+    >
       <div className="container">
         <div className="md:grid grid-cols-4 gap-8">
           <div className="col-span-1 relative">

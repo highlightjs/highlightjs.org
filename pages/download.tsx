@@ -283,7 +283,10 @@ const Download = () => {
   };
 
   return (
-    <MainLayout title="Download a Custom Build">
+    <MainLayout
+      title="Download a Custom Build"
+      description="Download a bundle with only the languages you want, without needing to introduce a build system or package manager to your application."
+    >
       <StickyViewport useBrowserViewport={true}>
         <PageContext.Provider
           value={{

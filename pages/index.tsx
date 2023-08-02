@@ -95,7 +95,9 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
   }, [snipIndex]);
 
   return (
-    <MainLayout>
+    <MainLayout
+      description={`A syntax highlighter written in JavaScript supporting ${LANG_COUNT} languages for Node.js and the web.`}
+    >
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-8 mb-12">
           <div className="flex flex-col justify-center order-2 lg:order-1">
@@ -116,7 +118,7 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
           <CodeBlock
             code={snippet}
             language={lang}
-            className="max-h-[400px] order-1 lg:order-2"
+            className="h-[400px] order-1 lg:order-2"
           />
         </div>
       </div>

@@ -1,4 +1,7 @@
 module.exports = {
+  env: {
+    domain: 'https://highlightjs.org',
+  },
   redirects: async () => [
     {
       source: '/usage',
