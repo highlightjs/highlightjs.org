@@ -19,7 +19,9 @@ export const DumbEditor = ({ className, onChange, value }: Props) => {
 
   return (
     <div>
-      <label htmlFor="code-editor" className="mb-2">Code</label>
+      <label htmlFor="code-editor" className="mb-2">
+        Code
+      </label>
       <textarea
         ref={ref}
         id="code-editor"

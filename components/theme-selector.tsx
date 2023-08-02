@@ -15,7 +15,9 @@ export const ThemeSelector = ({ className, onChange, value }: Props) => {
 
   return (
     <div className={className}>
-      <label htmlFor="theme-selector" className="mb-2">Theme</label>
+      <label htmlFor="theme-selector" className="mb-2">
+        Theme
+      </label>
       <select id="theme-selector" onChange={handleOnChange} value={value}>
         {themes.map((theme) => (
           <option key={theme}>{theme}</option>

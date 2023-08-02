@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import ExternalLink from './external-link';
+
 const links = [
   <Link href="/#usage">Usage</Link>,
   <Link href="/news">News</Link>,
@@ -29,10 +30,7 @@ export const Navigation = () => (
       <div className="ml-auto">
         <ul className="flex flex-wrap gap-x-3 gap-y-1 justify-center pl-0">
           {links.map((link, i) => (
-            <li
-              key={i}
-              className="text-xl font-bold"
-            >
+            <li key={i} className="text-xl font-bold">
               {link}
             </li>
           ))}

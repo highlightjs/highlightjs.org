@@ -4,7 +4,7 @@ import { pipeline } from 'stream/promises';
 
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { makeZip, ZipFileStructure } from '../../utilities/zip';
+import { ZipFileStructure, makeZip } from '../../utilities/zip';
 
 const HLJS_CACHE = path.resolve('./data/bundle-cache.zip');
 
