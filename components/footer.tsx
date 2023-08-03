@@ -48,7 +48,11 @@ export const Footer = () => (
       <div className="grid md:grid-cols-3 gap-6">
         <div className="text-center md:text-left">
           Copyright &copy; {new Date().getFullYear()}
-          <a href="https://www.netlify.com" className="block mt-3">
+          <a
+            href="https://www.netlify.com"
+            className="block mt-3"
+            target="_blank"
+          >
             <img
               src="https://www.netlify.com/v3/img/components/netlify-dark.svg"
               className="mx-auto md:ml-0"
