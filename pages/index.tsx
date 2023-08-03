@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import hljs from 'highlight.js';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import { HTMLTagsExample } from '../components/cdn-block';
@@ -129,15 +130,23 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
         </h2>
 
         <ul className="flex flex-col sm:flex-row align-items-center justify-center gap-8 mb-0 ml-0 text-center">
-          <li>
-            <img
-              src="./stackoverflow.png"
+          <li className="flex">
+            <Image
+              src="./stackoverflow.svg"
               alt="Stack Overflow"
-              className="mx-auto"
+              className="m-auto"
+              height={50}
+              width={256}
             />
           </li>
-          <li>
-            <img src="./discord.png" alt="Discord" className="mx-auto" />
+          <li className="flex">
+            <Image
+              src="./discord.svg"
+              alt="Discord"
+              className="m-auto"
+              height={47}
+              width={173}
+            />
           </li>
         </ul>
       </LightBackground>
