@@ -198,7 +198,10 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
             \`highlightAuto\` functions:
 
             ~~~js
-            const highlightedCode = hljs.highlight('<span>Hello World!</span>', { language: 'xml' }).value
+            const highlightedCode = hljs.highlight(
+              '<span>Hello World!</span>',
+              { language: 'xml' }
+            ).value
             ~~~
 
             For more details, see [the "Importing the Library" section of our README](https://github.com/highlightjs/highlight.js#importing-the-library).
