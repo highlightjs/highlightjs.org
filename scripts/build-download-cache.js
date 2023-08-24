@@ -41,7 +41,7 @@ const files = walkDir(hljsSrc, ['languages']);
 const archive = new JSZip().folder('highlight');
 
 files.forEach((file) => {
-  const zipPath = file.replace(hljsSrc, '');
+  const zipPath = file.replace(hljsSrc, '').substring(1);
   const data = fs.readFileSync(file);
 
   archive.file(zipPath, data);

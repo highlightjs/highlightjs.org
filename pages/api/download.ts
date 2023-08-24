@@ -89,7 +89,7 @@ function getLanguagesV2(request: NextApiRequest): string[] {
 
 function getMinifiedBundle(languages: string[]): ZipFileStructure {
   const zipFileStructure: ZipFileStructure = {
-    '/languages': {},
+    'languages': {},
   };
 
   const langSrcPath = path.resolve('./data/downloads/');
@@ -108,10 +108,10 @@ function getMinifiedBundle(languages: string[]): ZipFileStructure {
     }
 
     languageSources.push(src);
-    zipFileStructure['/languages'][lang + '.min.js'] = src;
+    zipFileStructure['languages'][lang + '.min.js'] = src;
   });
 
-  zipFileStructure['/highlight.min.js'] = languageSources.join('');
+  zipFileStructure['highlight.min.js'] = languageSources.join('');
 
   return zipFileStructure;
 }
