@@ -7,9 +7,9 @@ clean_data_dir() {
 }
 
 clone_hljs_repo() {
-  hljsVersion=$(cat package.json | jq -re '.dependencies["highlight.js"]')
+  hljsVersion=$(grep -o '"highlight.js": "[^"]*' package.json | cut -d'"' -f4)
 
-  echo "Using out highlight.js $hljsVersion..."
+  echo "Using highlight.js $hljsVersion..."
   git config --global advice.detachedHead false
   git clone -b "$hljsVersion" https://github.com/highlightjs/highlight.js.git
 
