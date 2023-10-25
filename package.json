@@ -7,9 +7,10 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "npm-run-all build:deps:clone build:deps:cache build:deps:themes build:next",
+    "build": "npm-run-all build:deps:clone build:deps:cache build:deps:categories build:deps:themes build:next",
     "build:next": "next build",
     "build:deps:cache": "node scripts/build-download-cache.js",
+    "build:deps:categories": "node scripts/build-categories.js",
     "build:deps:clone": "./scripts/clone-hljs-source.sh",
     "build:deps:themes": "node scripts/build-styles.js",
     "start": "next start -p $PORT",

@@ -14,8 +14,8 @@ import {
 
 import { BlurredBackground } from '../components/blurredbackground';
 import SearchableText from '../components/searchable-text';
+import LANG_CATS from '../data/categories.json';
 import { MainLayout } from '../layouts/main';
-import { LANG_CATS } from '../utilities/constants';
 import { classList } from '../utilities/cssClasses';
 import { removeFirst } from '../utilities/utilities';
 
