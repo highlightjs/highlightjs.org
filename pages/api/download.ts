@@ -89,7 +89,7 @@ function getLanguagesV2(request: NextApiRequest): string[] {
 
 function getMinifiedBundle(languages: string[]): ZipFileStructure {
   const zipFileStructure: ZipFileStructure = {
-    'languages': {},
+    languages: {},
   };
 
   const langSrcPath = path.resolve('./data/downloads/');
