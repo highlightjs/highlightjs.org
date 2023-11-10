@@ -12,6 +12,7 @@ import {
   useState,
 } from 'react';
 
+import { Alert, AlertTypes } from '../components/alert';
 import { BlurredBackground } from '../components/blurredbackground';
 import SearchableText from '../components/searchable-text';
 import LANG_CATS from '../data/categories.json';
@@ -310,6 +311,19 @@ const Download = () => {
                   <BundlerControls />
                 </section>
               </StickyElement>
+
+              <Alert
+                className="mb-6"
+                type={AlertTypes.Note}
+                title="Behavior Changes"
+              >
+                The design of the download bundle has changed and may be
+                slightly different than what you're expecting. See{' '}
+                <a href="https://github.com/highlightjs/highlightjs.org/pull/10">
+                  PR #10
+                </a>{' '}
+                for more information.
+              </Alert>
 
               <section>
                 {Object.keys(LANG_CATS).map((category) => (
