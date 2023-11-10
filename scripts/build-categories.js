@@ -11,10 +11,18 @@ if (fs.existsSync(outputCategories)) {
   fs.unlinkSync(outputCategories);
 }
 
-let categories = {};
+let categories = {
+  'Miscellaneous': [],
+};
 
 glob.sync(langSrcDir).forEach((filePath) => {
   const language = Language.fromFile(filePath);
+
+  if (language.categories.length === 0) {
+    categories['Miscellaneous'].push(language.name);
+
+    return;
+  }
 
   language.categories.forEach((category) => {
     // A poor man's "to title case;" all our categories are single words
