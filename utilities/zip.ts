@@ -6,7 +6,7 @@ export interface ZipFileStructure {
 }
 
 export async function makeZip(contents: ZipFileStructure, baseZipFile = null) {
-  let zip;
+  let zip: JSZip;
 
   if (baseZipFile === null) {
     zip = new JSZip();

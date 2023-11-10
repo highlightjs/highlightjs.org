@@ -12,7 +12,7 @@ if (fs.existsSync(outputCategories)) {
 }
 
 let categories = {
-  'Miscellaneous': [],
+  Miscellaneous: [],
 };
 
 glob.sync(langSrcDir).forEach((filePath) => {

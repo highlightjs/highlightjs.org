@@ -1,17 +1,29 @@
 #!/usr/bin/env bash
 set -e
 
+HLJS_REPO="https://github.com/highlightjs/highlight.js.git"
+HLJS_COMMIT="c9e7cbfddceb50b6e71f731c76c4a9c739bb1262"
+
 clean_data_dir() {
   mkdir -p data/{downloads,snippets}/
+  mkdir -p data/downloads/es/
   rm -rf highlight.js
 }
 
 clone_hljs_repo() {
+  # Purposely not using something like `jq` for environments that don't have it installed (e.g. Vercel)
   hljsVersion=$(grep -o '"highlight.js": "[^"]*' package.json | cut -d'"' -f4)
 
-  echo "Using highlight.js $hljsVersion..."
   git config --global advice.detachedHead false
-  git clone -b "$hljsVersion" https://github.com/highlightjs/highlight.js.git
+
+  if [ -z "$HLJS_COMMIT" ]; then
+    echo "Using highlight.js $hljsVersion..."
+    git clone -b "$hljsVersion" "$HLJS_REPO"
+  else
+    echo "Using highlight.js commit $HLJS_COMMIT"
+    git clone --depth 50 "$HLJS_REPO"
+    git -C highlight.js reset --hard $HLJS_COMMIT
+  fi
 
   cd highlight.js
 }
@@ -34,12 +46,22 @@ build_hljs_download() {
   # otherwise they won't get installed.
   npm install --production=false
 
+  node tools/build.js --no-minify -t cdn
+  rm -f build/languages/*.js.js
+  cp build/highlight.js "../data/downloads/"
+  cp build/languages/*.js "../data/downloads/"
+  cp build/es/highlight.js "../data/downloads/es/"
+  cp build/es/languages/*.js "../data/downloads/es/"
+
   # Build highlight.js in CDN mode so that we have each language in their own
   # file that can be concatenated.
   node tools/build.js -t cdn
 
+  cp build/es/languages/* "../data/downloads/es/"
+  cp build/es/highlight.min.js "../data/downloads/es/"
   cp build/languages/* "../data/downloads/"
   cp build/highlight.min.js "../data/downloads/"
+  cp build/DIGESTS.md "../data/"
 }
 
 clean_data_dir
