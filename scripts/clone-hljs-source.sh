@@ -2,7 +2,7 @@
 set -e
 
 HLJS_REPO="https://github.com/highlightjs/highlight.js.git"
-HLJS_COMMIT="c9e7cbfddceb50b6e71f731c76c4a9c739bb1262"
+HLJS_COMMIT="b7ec4bfafcd8e78a8bbcab353ef9783458a31b89"
 
 clean_data_dir() {
   mkdir -p data/{downloads,snippets}/
