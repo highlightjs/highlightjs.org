@@ -1,0 +1,63 @@
+.alert {
+  @apply flex rounded-lg border-2 p-2 pb-3;
+
+  a {
+    @apply font-bold underline;
+  }
+
+  &-note {
+    @apply border-cyan-300 bg-cyan-600;
+
+    .icon {
+      @apply text-cyan-100;
+    }
+
+    a {
+      @apply text-cyan-900;
+    }
+  }
+
+  &-success {
+    @apply border-green-300 bg-green-700;
+
+    .icon {
+      @apply text-green-200;
+    }
+
+    a {
+      @apply text-green-200;
+    }
+  }
+
+  &-warning {
+    @apply border-yellow-300 bg-yellow-700;
+
+    .icon {
+      @apply text-yellow-200;
+    }
+
+    a {
+      @apply text-yellow-200;
+    }
+  }
+
+  &-danger {
+    @apply border-red-300 bg-red-700;
+
+    .icon {
+      @apply text-red-200;
+    }
+
+    a {
+      @apply text-red-200;
+    }
+  }
+}
+
+.icon {
+  @apply mr-2 mt-1 w-7;
+}
+
+.message {
+  @apply text-sm leading-4;
+}
