@@ -16,6 +16,12 @@ type FileSystemNode = {
   [key: string]: string | FileSystemNode;
 };
 
+export const config = {
+  api: {
+    responseLimit: '15mb',
+  },
+};
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   let apiVersion: number | null;
   if (
