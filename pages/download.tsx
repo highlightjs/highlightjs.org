@@ -6,6 +6,7 @@ import {
   FormEvent,
   SyntheticEvent,
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useRef,
@@ -14,11 +15,11 @@ import {
 
 import { Alert, AlertTypes } from '../components/alert';
 import { BlurredBackground } from '../components/blurredbackground';
+import { Checkbox } from '../components/Checkbox';
 import SearchableText from '../components/searchable-text';
 import LANG_CATS from '../data/categories.json';
 import { MainLayout } from '../layouts/main';
 import { classList } from '../utilities/cssClasses';
-import { removeFirst } from '../utilities/utilities';
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   // For backward compatability, redirect any POST requests made the `/download`
@@ -38,9 +39,15 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   };
 };
 
+enum SelectionState {
+  None,
+  Some,
+  All,
+}
+
 interface PageContext {
-  addLanguage: (lang: string) => void;
-  delLanguage: (lang: string) => void;
+  addLanguage: (lang: string | string[]) => void;
+  delLanguage: (lang: string | string[]) => void;
   filter: string;
   selectedLanguages: string[];
   setFilter: (filter: string) => void;
@@ -197,11 +204,24 @@ interface LanguageCategoryProps {
 }
 
 const LanguageCategory = ({ category }: LanguageCategoryProps) => {
+  const [selection, setSelection] = useState(SelectionState.None);
   const [hasMatches, setHasMatches] = useState(false);
   const [langMatches, setLangMatches] = useState<Record<string, boolean>>({});
-  const { filter } = useContext(PageContext);
+  const { filter, addLanguage, delLanguage, selectedLanguages } =
+    useContext(PageContext);
 
   const isFilterActive = !!filter;
+
+  const handleSelectAll = useCallback(
+    (event: SyntheticEvent<HTMLInputElement>) => {
+      if (event.currentTarget.checked || selection === SelectionState.Some) {
+        addLanguage(LANG_CATS[category]);
+      } else {
+        delLanguage(LANG_CATS[category]);
+      }
+    },
+    [],
+  );
 
   const handleFilterResults = (lang: string, matched: boolean) => {
     setLangMatches((prevState) => ({
@@ -218,6 +238,25 @@ const LanguageCategory = ({ category }: LanguageCategoryProps) => {
     setHasMatches(Object.values(langMatches).some((v) => v === true));
   }, [langMatches]);
 
+  useEffect(() => {
+    const langs = new Set<string>(selectedLanguages);
+    let langCount = 0;
+
+    for (const lang of LANG_CATS[category]) {
+      if (langs.has(lang)) {
+        langCount++;
+      }
+    }
+
+    if (langCount === 0) {
+      setSelection(SelectionState.None);
+    } else if (langCount === LANG_CATS[category].length) {
+      setSelection(SelectionState.All);
+    } else {
+      setSelection(SelectionState.Some);
+    }
+  }, [selectedLanguages]);
+
   return (
     <BlurredBackground
       className={classList([
@@ -227,9 +266,18 @@ const LanguageCategory = ({ category }: LanguageCategoryProps) => {
       ])}
     >
       <fieldset key={category}>
-        <legend className="border-b pb-2 mb-6 w-full text-xl font-bold">
-          {category}
-        </legend>
+        <div className="border-b flex items-center mb-6 pb-2 w-full">
+          <label className="font-normal mr-2 text-sm">
+            <Checkbox
+              onChange={handleSelectAll}
+              checked={selection === SelectionState.All}
+              indeterminate={selection === SelectionState.Some}
+            />
+            <span className="sr-only">Select All</span>
+          </label>
+
+          <legend className="font-bold text-xl">{category}</legend>
+        </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
           {LANG_CATS[category].map((language) => (
@@ -249,14 +297,34 @@ const Download = () => {
   const [filter, setFilter] = useState('');
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
 
-  const addLanguage = (language: string) => {
-    const newLanguages = [...selectedLanguages, language];
-    newLanguages.sort();
+  const editLanguage = (languages: string | string[], add: boolean) => {
+    return (currLangs: string[]) => {
+      const newLangs = new Set<string>(currLangs);
+      const fxnCall = add ? 'add' : 'delete';
 
-    setSelectedLanguages(newLanguages);
+      if (Array.isArray(languages)) {
+        languages.forEach((lang) => newLangs[fxnCall](lang));
+      } else {
+        newLangs[fxnCall](languages);
+      }
+
+      return Array.from(newLangs).sort();
+    };
   };
-  const delLanguage = (language: string) => {
-    setSelectedLanguages(removeFirst(selectedLanguages, language));
+
+  const addLanguage = (language: string | string[]) => {
+    setSelectedLanguages(editLanguage(language, true));
+  };
+  const delLanguage = (language: string | string[]) => {
+    setSelectedLanguages(editLanguage(language, false));
+  };
+
+  const handleOnSelectAll = (event: SyntheticEvent<HTMLInputElement>) => {
+    if (event.currentTarget.checked) {
+      setSelectedLanguages(hljs.listLanguages());
+    } else {
+      setSelectedLanguages([]);
+    }
   };
 
   const handleOnSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -282,6 +350,9 @@ const Download = () => {
         saveAs(blob, 'highlight.zip');
       });
   };
+
+  const allLangSelected =
+    selectedLanguages.length === hljs.listLanguages().length;
 
   return (
     <MainLayout
@@ -324,6 +395,18 @@ const Download = () => {
                 </a>{' '}
                 for more information.
               </Alert>
+
+              <label className="pb-4">
+                <Checkbox
+                  className="mr-2"
+                  checked={allLangSelected}
+                  indeterminate={
+                    selectedLanguages.length > 0 && !allLangSelected
+                  }
+                  onChange={handleOnSelectAll}
+                />
+                Select All Languages
+              </label>
 
               <section>
                 {Object.keys(LANG_CATS).map((category) => (
