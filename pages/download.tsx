@@ -273,7 +273,7 @@ const LanguageCategory = ({ category }: LanguageCategoryProps) => {
               checked={selection === SelectionState.All}
               indeterminate={selection === SelectionState.Some}
             />
-            <span className="sr-only">Select All</span>
+            <span className="sr-only">Select all {category} languages</span>
           </label>
 
           <legend className="font-bold text-xl">{category}</legend>
@@ -405,7 +405,7 @@ const Download = () => {
                   }
                   onChange={handleOnSelectAll}
                 />
-                Select All Languages
+                Select all languages
               </label>
 
               <section>
