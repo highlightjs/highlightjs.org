@@ -41,6 +41,11 @@ export const MainLayout = ({ children, description, title }: Props) => {
             <h1 className="text-3xl leading-tight">{title}</h1>
           </div>
         )}
+        {description && (
+          <div className="container mb-4">
+            <p className="mb-8 pl-8 lg:pl-6 text-lg md:text-xl lg:text-2xl">{description}</p>
+          </div>
+        )}
         {children}
       </main>
 
