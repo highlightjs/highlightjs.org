@@ -80,6 +80,8 @@ export async function getStaticProps() {
   };
 }
 
+const description = `The Internet's favorite JavaScript syntax highlighter supporting Node.js and the web.`;
+
 const Home = ({ languages, latestVersion, snippets }: Props) => {
   const [snipIndex, setSnipIndex] = useState(0);
   const [lang, setLang] = useState(languages[snipIndex]);
@@ -96,12 +98,11 @@ const Home = ({ languages, latestVersion, snippets }: Props) => {
   }, [snipIndex]);
 
   return (
-    <MainLayout
-      description={`A syntax highlighter written in JavaScript supporting ${LANG_COUNT} languages for Node.js and the web.`}
-    >
+    <MainLayout description={description}>
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-8 mb-12">
           <div className="flex flex-col justify-center order-2 lg:order-1">
+            <p className="mb-8 text-lg md:text-xl lg:text-2xl">{description}</p>
             <ul className="mb-8 pl-8 lg:pl-6 text-lg md:text-xl lg:text-2xl list-disc md:columns-2 lg:columns-1">
               <li>
                 {LANG_COUNT} languages and {THEME_COUNT} themes
