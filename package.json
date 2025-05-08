@@ -25,7 +25,7 @@
     "dedent": "^1.5.3",
     "file-saver": "^2.0.5",
     "gray-matter": "^4.0.2",
-    "highlight.js": "11.10.0",
+    "highlight.js": "11.11.1",
     "indent-textarea": "^4.0.0",
     "jszip": "^3.10.0",
     "lodash.escaperegexp": "^4.1.2",
